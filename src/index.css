@@ -1,0 +1,272 @@
+@import "tailwindcss";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/great-vibes/400.css";
+
+@theme {
+  --font-serif: "Montserrat", system-ui, sans-serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-script: "Great Vibes", cursive;
+  --color-canvas: #f4ede4;
+  --color-ivory: #f4ede4;
+  --color-cream: #ebe3d8;
+  --color-beige: #e3d9cc;
+  --color-blush: #cfcbcb;
+  --color-mauve: #747474;
+  --color-ink: #000000;
+  --color-burgundy: #564438;
+  --color-wine: #46362c;
+  --color-plum: #0e3a2d;
+  --color-brown: #564438;
+  --color-gold: #564438;
+  --color-muted: #747474;
+}
+
+html,
+body {
+  margin: 0;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: var(--color-ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(86, 68, 56, 0.06), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(70, 54, 44, 0.05), transparent 50%),
+    #f4ede4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+::selection {
+  background: rgba(86, 68, 56, 0.18);
+  color: #000;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #564438;
+  outline-offset: 2px;
+}
+
+.font-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #564438;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: 10px auto 0;
+  background: #564438;
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: drawLine 0.35s 0.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes drawLine {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: 1px solid #564438;
+  background: #564438;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background: #46362c;
+  border-color: #46362c;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(70, 54, 44, 0.18);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-outline {
+  background: #faf6f1;
+  border-color: #564438;
+  color: #000;
+}
+
+.btn-outline:hover {
+  background: #564438;
+  color: #fff;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  color: #000;
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  opacity: 0.7;
+  background: rgba(86, 68, 56, 0.06);
+}
+
+.icon-btn:active {
+  transform: scale(0.94);
+}
+
+.wa-fab {
+  position: fixed !important;
+  right: max(1.25rem, env(safe-area-inset-right));
+  left: auto;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 80;
+}
+
+.wa-fab::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 999px;
+  border: 1.5px solid #25d366;
+  animation: waPulse 2.4s ease-out infinite;
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .wa-fab {
+    bottom: calc(5.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hangly-style charm: interactive hit-target only on the charm body */
+.dreamcatcher-charm {
+  z-index: 40;
+  width: 5.5rem;
+  pointer-events: none;
+}
+
+.dreamcatcher-charm [role='img'] {
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .dreamcatcher-charm {
+    width: 6.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dreamcatcher-charm {
+    width: 7.75rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .dreamcatcher-charm {
+    left: 0;
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .section-title::after,
+  .wa-fab::before {
+    animation: none;
+  }
+  .section-title::after {
+    transform: scaleX(1);
+  }
+  .btn:hover,
+  .icon-btn:active {
+    transform: none;
+  }
+}
