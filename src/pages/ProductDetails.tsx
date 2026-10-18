@@ -52,12 +52,12 @@ export default function ProductDetailsPage() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-6">
       <Seo
         title={`${product.name} | Ajitha Collection`}
         description={product.description}
       />
-      <article className="mx-auto grid max-w-6xl gap-6 px-4 pt-[4.5rem] sm:px-6 lg:grid-cols-2 lg:items-start lg:gap-8 lg:px-8">
+      <article className="mx-auto grid max-w-6xl gap-5 px-4 pt-[4.25rem] sm:px-6 lg:grid-cols-2 lg:items-start lg:gap-7 lg:px-8">
         <div>
           <ProductGallery product={product} />
         </div>

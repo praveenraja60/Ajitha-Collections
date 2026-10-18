@@ -13,5 +13,5 @@ export function whatsappLink(message?: string) {
 
 export function productEnquiryMessage(name: string, priceLabel: string, size?: string) {
   const sizeBit = size ? ` Size: ${size}.` : ''
-  return `Hi Ajitha Collection, I'm interested in the ${name} (${priceLabel}).${sizeBit} Please share fabric, availability and stitching time.`
+  return `Hi Ajitha Collection, I'm interested in the ${name} (${priceLabel}).${sizeBit} Please share fabric and availability — stitching takes about 15 days.`
 }

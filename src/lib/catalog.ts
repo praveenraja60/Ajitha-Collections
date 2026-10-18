@@ -100,7 +100,7 @@ function toProduct(id: number, images: CatalogImage[]): ShopProduct {
     color: extra.color,
     sizes: extra.sizes ?? ['S', 'M', 'L', 'XL', 'XXL'],
     category: extra.category ?? CATEGORIES[(id - 1) % CATEGORIES.length],
-    availability: 'Made to order · 7–10 days',
+    availability: 'Made to order · 15 days',
     images,
     main,
   }

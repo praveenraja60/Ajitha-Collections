@@ -24,30 +24,33 @@ export default function Hero() {
 
   return (
     <section
-      className="relative bg-canvas pt-[3.6rem]"
+      className="relative bg-canvas pt-[3.4rem]"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
     >
       <div className="relative w-full overflow-hidden">
-        {HERO_SLIDES.map((slide, idx) => (
-          <img
-            key={slide.src}
-            src={slide.src}
-            alt={idx === i ? slide.alt : ''}
-            fetchPriority={idx === 0 ? 'high' : 'low'}
-            decoding={idx === 0 ? 'sync' : 'async'}
-            className={
-              idx === i
-                ? 'relative block h-auto w-full'
-                : 'pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-0'
-            }
-            style={{
-              opacity: idx === i ? 1 : 0,
-              transition: reduce ? undefined : `opacity ${FADE_S}s cubic-bezier(0.4, 0, 0.2, 1)`,
-            }}
-            draggable={false}
-          />
-        ))}
+        {HERO_SLIDES.map((slide, idx) => {
+          const active = idx === i
+          return (
+            <img
+              key={slide.src}
+              src={slide.src}
+              alt={active ? slide.alt : ''}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              className={
+                active
+                  ? 'relative block h-auto w-full'
+                  : 'pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-0'
+              }
+              style={{
+                opacity: active ? 1 : 0,
+                transition: reduce ? undefined : `opacity ${FADE_S}s cubic-bezier(0.4, 0, 0.2, 1)`,
+              }}
+              draggable={false}
+            />
+          )
+        })}
 
         {HERO_SLIDES.length > 1 && (
           <>
@@ -73,7 +76,7 @@ export default function Hero() {
         )}
       </div>
 
-      <div className="flex justify-center gap-2 py-3" role="tablist" aria-label="Hero slides">
+      <div className="flex justify-center gap-2 py-2" role="tablist" aria-label="Hero slides">
         {HERO_SLIDES.map((_, idx) => (
           <button
             key={idx}

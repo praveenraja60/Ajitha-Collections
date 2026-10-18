@@ -5,7 +5,7 @@ import { easeLuxury, imageZoom, view } from '../lib/motion'
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-4 py-6 sm:px-6">
+    <section id="contact" className="content-auto px-4 py-4 sm:px-6 sm:py-5">
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}

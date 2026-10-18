@@ -17,7 +17,7 @@ const posts = [
 
 export default function InstagramGallery() {
   return (
-    <section className="px-4 py-6 sm:px-6">
+    <section className="content-auto px-4 py-4 sm:px-6 sm:py-5">
       <div className="mx-auto max-w-7xl">
         <Reveal className="flex items-end justify-between gap-3">
           <div>

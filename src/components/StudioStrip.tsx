@@ -4,7 +4,7 @@ import { easeLuxury, view } from '../lib/motion'
 
 export default function StudioStrip() {
   return (
-    <section className="px-4 py-5 sm:px-6">
+    <section className="content-auto px-4 py-3.5 sm:px-6 sm:py-4">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -12,7 +12,7 @@ export default function StudioStrip() {
         transition={{ duration: 0.28, ease: easeLuxury }}
         className="mx-auto max-w-7xl"
       >
-        <div className="relative overflow-hidden rounded-[10px] bg-burgundy px-6 py-7 text-white sm:px-10 sm:py-8">
+        <div className="relative overflow-hidden rounded-[10px] bg-burgundy px-5 py-5 text-white sm:px-8 sm:py-6">
           <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-[10px] tracking-[0.32em] uppercase text-white/80">The boutique</p>

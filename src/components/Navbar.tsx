@@ -61,10 +61,10 @@ export default function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.25, ease: easeLuxury }}
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-400 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-300 ${
         scrolled
-          ? 'border-beige/80 bg-canvas/90 shadow-[0_8px_30px_rgba(70,54,44,0.06)] backdrop-blur-md'
-          : 'border-beige bg-canvas/95 backdrop-blur-sm'
+          ? 'border-beige/80 bg-canvas/95 shadow-[0_6px_20px_rgba(70,54,44,0.05)]'
+          : 'border-beige bg-canvas/98'
       }`}
     >
       <nav

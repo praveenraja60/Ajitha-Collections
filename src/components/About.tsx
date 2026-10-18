@@ -9,8 +9,8 @@ const quotes = [
 
 export default function About() {
   return (
-    <section id="about" className="px-4 py-7 sm:px-6">
-      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <section id="about" className="content-auto px-4 py-5 sm:px-6">
+      <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}

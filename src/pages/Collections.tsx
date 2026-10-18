@@ -28,7 +28,7 @@ export default function CollectionsPage() {
   const chips = ['all', ...CATEGORIES] as const
 
   return (
-    <div className="px-4 pb-8 pt-[4.5rem] sm:px-6">
+    <div className="px-4 pb-6 pt-[4.25rem] sm:px-6">
       <Seo
         title="Shop dresses | Ajitha Collection"
         description="Browse festive, occasion, everyday and statement looks. Custom stitching on WhatsApp."

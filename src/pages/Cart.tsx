@@ -9,7 +9,7 @@ export default function CartPage() {
   const { lines, setQty, remove, clear, count } = useCart()
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-8 pt-[4.5rem] sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 pb-6 pt-[4.25rem] sm:px-6">
       <Seo title="Cart | Ajitha Collection" description="Review your bag and order on WhatsApp." />
       <p className="eyebrow">Bag</p>
       <h1 className="mt-1 font-sans text-3xl">Cart</h1>

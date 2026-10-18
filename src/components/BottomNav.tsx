@@ -18,7 +18,7 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-beige bg-canvas/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-beige bg-canvas/98 pb-[env(safe-area-inset-bottom)] lg:hidden"
       aria-label="Mobile"
     >
       <LayoutGroup>

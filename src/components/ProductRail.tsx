@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import type { ShopProduct } from '../lib/catalog'
 import ProductCard from './ProductCard'
 import Reveal from './Reveal'
 
-const SPEED_PX_S = 58
-const COPIES = 3
+const SPEED_PX_S = 52
+const COPIES = 2
 
 export default function ProductRail({
   eyebrow,
@@ -17,8 +17,10 @@ export default function ProductRail({
   title: string
   products: ShopProduct[]
 }) {
+  const sectionRef = useRef<HTMLElement>(null)
   const scroller = useRef<HTMLDivElement>(null)
   const pausedRef = useRef(false)
+  const onScreenRef = useRef(true)
   const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
 
@@ -30,6 +32,19 @@ export default function ProductRail({
   useEffect(() => {
     pausedRef.current = paused
   }, [paused])
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreenRef.current = entry.isIntersecting
+      },
+      { rootMargin: '80px', threshold: 0 },
+    )
+    io.observe(section)
+    return () => io.disconnect()
+  }, [])
 
   function unitWidth(el: HTMLDivElement) {
     return el.scrollWidth / COPIES
@@ -49,19 +64,10 @@ export default function ProductRail({
     wrap(el)
   }
 
-  function pause() {
-    setPaused(true)
-  }
-
-  function resume() {
-    setPaused(false)
-  }
-
   useEffect(() => {
     const el = scroller.current
     if (!el || products.length === 0 || reduce) return
 
-    // Start mid-track so wrap works in both directions
     const boot = () => {
       const unit = unitWidth(el)
       if (unit > 0 && el.scrollLeft < 8) el.scrollLeft = unit
@@ -77,7 +83,7 @@ export default function ProductRail({
     const tick = (now: number) => {
       const dt = Math.min(40, now - last)
       last = now
-      if (!pausedRef.current && el.scrollWidth > el.clientWidth) {
+      if (onScreenRef.current && !pausedRef.current && el.scrollWidth > el.clientWidth) {
         el.scrollLeft += (SPEED_PX_S * dt) / 1000
         wrap(el)
       }
@@ -93,49 +99,47 @@ export default function ProductRail({
   }, [products, loop.length, reduce])
 
   return (
-    <section className="px-4 py-6 sm:px-6">
+    <section ref={sectionRef} className="px-4 py-4 sm:px-6 sm:py-5">
       <div className="mx-auto max-w-7xl">
-        <Reveal className="mb-4 flex items-end justify-between gap-3">
+        <Reveal className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="eyebrow">{eyebrow}</p>
-            <h2 className="mt-2 font-sans text-[1.85rem] leading-tight sm:text-[2.15rem]">{title}</h2>
+            <h2 className="mt-1.5 font-sans text-[1.7rem] leading-tight sm:text-[2rem]">{title}</h2>
           </div>
           <div className="flex gap-1">
-            <motion.button
+            <button
               type="button"
-              className="icon-btn min-h-11 min-w-11 border border-beige"
+              className="icon-btn min-h-10 min-w-10 border border-beige"
               aria-label="Previous products"
               onClick={() => move(-1)}
-              whileTap={{ scale: 0.92 }}
             >
               <ChevronLeft size={18} strokeWidth={1.5} />
-            </motion.button>
-            <motion.button
+            </button>
+            <button
               type="button"
-              className="icon-btn min-h-11 min-w-11 border border-beige"
+              className="icon-btn min-h-10 min-w-10 border border-beige"
               aria-label="Next products"
               onClick={() => move(1)}
-              whileTap={{ scale: 0.92 }}
             >
               <ChevronRight size={18} strokeWidth={1.5} />
-            </motion.button>
+            </button>
           </div>
         </Reveal>
 
         <div
           ref={scroller}
-          className="flex gap-3 overflow-x-hidden pb-2 sm:gap-4"
-          onMouseEnter={pause}
-          onMouseLeave={resume}
-          onTouchStart={pause}
-          onTouchEnd={resume}
-          onPointerDown={pause}
-          onPointerUp={resume}
+          className="flex gap-2.5 overflow-x-hidden pb-1 sm:gap-3.5"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+          onPointerDown={() => setPaused(true)}
+          onPointerUp={() => setPaused(false)}
         >
           {loop.map((product, i) => (
             <div
               key={`${product.id}-${i}`}
-              className="w-[46vw] max-w-[260px] min-w-[160px] shrink-0 sm:w-[230px]"
+              className="w-[44vw] max-w-[240px] min-w-[150px] shrink-0 sm:w-[210px]"
             >
               <ProductCard product={product} />
             </div>

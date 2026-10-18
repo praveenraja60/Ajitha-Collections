@@ -19,8 +19,14 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
   useEffect(() => {
     setI(0)
     setOpen(false)
-    preloadMany(images.map((img) => img.src))
-  }, [product.id])
+    // Preload only first pair — keeps product pages snappy
+    preloadMany(images.slice(0, 2).map((img) => img.src))
+  }, [product.id, images])
+
+  useEffect(() => {
+    const next = images[(i + 1) % images.length]
+    if (next) preloadMany([next.src])
+  }, [i, images])
 
   useEffect(() => {
     if (images.length < 2) return

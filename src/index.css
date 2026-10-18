@@ -224,6 +224,12 @@ img {
   display: none;
 }
 
+/* Skip offscreen paint work where supported */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 640px;
+}
+
 /* Hangly-style charm: interactive hit-target only on the charm body */
 .dreamcatcher-charm {
   z-index: 40;

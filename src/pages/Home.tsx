@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Seo
         title="Ajitha Collection | Your Style. Your Design. Our Craft."
-        description="Premium custom women’s fashion. Browse the edit, choose a look, and order on WhatsApp — made to measure in 7–10 days."
+        description="Premium custom women’s fashion. Browse the edit, choose a look, and order on WhatsApp — made to measure in 15 days."
       />
       <Hero />
       <FeaturedCollections />

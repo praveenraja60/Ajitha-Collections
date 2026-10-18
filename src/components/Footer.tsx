@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_DISPLAY, whatsappLink } from '../lib/whatsapp'
 import InstagramGlyph from './InstagramGlyph'
 import { scrollToId } from '../lib/scroll'
-import { CATEGORIES } from '../data/productInfo'
+import { easeLuxury } from '../lib/motion'
 
 function WhatsAppGlyph({ className }: { className?: string }) {
   return (
@@ -16,12 +16,10 @@ function WhatsAppGlyph({ className }: { className?: string }) {
   )
 }
 
-const heading = 'text-[11px] font-semibold tracking-[0.16em] uppercase text-[#e8d5c4]'
-const linkCls = 'text-sm text-white/80 transition hover:text-white'
-
 export default function Footer() {
   const navigate = useNavigate()
   const onHome = useLocation().pathname === '/'
+  const year = new Date().getFullYear()
 
   function goSection(id: string) {
     if (onHome) {
@@ -34,69 +32,102 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="bg-[#46362c] text-white"
+      className="site-footer relative overflow-hidden text-[#f4ede4]"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}
-      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.3, ease: easeLuxury }}
     >
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-3 lg:px-8">
-        <div>
-          <p className={heading}>Company name</p>
-          <p className="mt-4 font-script text-[2.6rem] leading-none text-[#e8d5c4]">Ajitha Collection</p>
-          <p className="mt-4 text-sm leading-relaxed text-white/75">Your Style. Your Design. Our Craft.</p>
-          <p className="mt-3 text-sm text-white/65">Premium custom women’s fashion, made to your measurements.</p>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(800px 360px at 15% 0%, rgba(232,213,196,0.12), transparent 55%), linear-gradient(165deg, #3a2c24 0%, #46362c 50%, #2f241e 100%)',
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#e8d5c4]/40 to-transparent"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8">
+        <div className="flex flex-col items-center text-center">
+          <p className="text-[10px] tracking-[0.32em] text-[#e8d5c4]/70 uppercase">The atelier</p>
+          <p className="mt-2 font-script text-[3rem] leading-none text-[#e8d5c4] sm:text-[3.6rem]">
+            Ajitha
+          </p>
+          <p className="mt-1 text-[10px] font-semibold tracking-[0.36em] text-[#f4ede4]/7 uppercase">
+            Collection
+          </p>
+          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-[#f4ede4]/65">
+            Your style. Your design. Our craft.
+          </p>
         </div>
 
-        <nav aria-label="Visit">
-          <p className={heading}>Visit</p>
-          <ul className="mt-4 space-y-2.5">
-            <li><button type="button" className={linkCls} onClick={() => goSection('about')}>About Us</button></li>
-            <li><button type="button" className={linkCls} onClick={() => goSection('contact')}>Contact Us</button></li>
-            <li>
-              <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className={`${linkCls} inline-flex items-center gap-2`}>
-                <InstagramGlyph className="h-4 w-4" /> {INSTAGRAM_HANDLE}
-              </a>
-            </li>
-            <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className={`${linkCls} inline-flex items-center gap-2`}>
-                <WhatsAppGlyph className="h-4 w-4" /> {WHATSAPP_DISPLAY}
-              </a>
-            </li>
-            <li>
-              <a href={whatsappLink('Hi Ajitha Collection, I need styling assistance.')} target="_blank" rel="noreferrer" className={linkCls}>
-                Styling assistance
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div className="mx-auto mt-5 flex flex-col items-stretch justify-center gap-2 sm:max-w-lg sm:flex-row sm:items-center">
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] bg-[#e8d5c4] px-5 text-[11px] font-semibold tracking-[0.12em] text-[#2f241e] uppercase transition hover:bg-[#f4ede4]"
+          >
+            <WhatsAppGlyph className="h-4 w-4" />
+            Order on WhatsApp
+          </a>
+          <div className="inline-flex min-h-11 items-center justify-center rounded-[10px] border border-[#e8d5c4]/25 px-4 text-[10px] tracking-[0.14em] text-[#e8d5c4]/85 uppercase">
+            Made to order · 15 days
+          </div>
+        </div>
 
-        <nav aria-label="Orders">
-          <p className={heading}>Orders</p>
-          <ul className="mt-4 space-y-2.5">
-            <li><Link to="/products" className={linkCls}>All Products</Link></li>
-            {CATEGORIES.map((c) => (
-              <li key={c}>
-                <Link to={`/products?category=${encodeURIComponent(c)}`} className={linkCls}>
-                  {c}
-                </Link>
-              </li>
-            ))}
-            <li><Link to="/cart" className={linkCls}>Cart</Link></li>
-            <li><Link to="/wishlist" className={linkCls}>Wishlist</Link></li>
-            <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className={linkCls}>
-                Order on WhatsApp
-              </a>
-            </li>
-            <li className="pt-1 text-sm text-white/65">Made to order · 7–10 days</li>
-          </ul>
-        </nav>
-      </div>
+        <div className="mt-6 flex flex-col items-center gap-3 border-t border-[#e8d5c4]/12 pt-4 sm:flex-row sm:justify-between">
+          <nav
+            aria-label="Footer"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12px] tracking-[0.06em] text-[#f4ede4]/65"
+          >
+            <Link to="/products" className="transition hover:text-[#e8d5c4]">
+              Shop
+            </Link>
+            <button type="button" className="transition hover:text-[#e8d5c4]" onClick={() => goSection('about')}>
+              About
+            </button>
+            <button type="button" className="transition hover:text-[#e8d5c4]" onClick={() => goSection('contact')}>
+              Contact
+            </button>
+            <Link to="/wishlist" className="transition hover:text-[#e8d5c4]">
+              Wishlist
+            </Link>
+            <Link to="/cart" className="transition hover:text-[#e8d5c4]">
+              Cart
+            </Link>
+          </nav>
 
-      <div className="border-t border-white/12">
-        <p className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-white/55 sm:px-6 lg:px-8">
-          © 2026 Ajitha Collection. All rights reserved.
+          <div className="flex items-center gap-2">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={INSTAGRAM_HANDLE}
+              title={INSTAGRAM_HANDLE}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e8d5c4]/25 text-[#e8d5c4] transition hover:bg-[#e8d5c4]/10"
+            >
+              <InstagramGlyph className="h-4 w-4" />
+            </a>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`WhatsApp ${WHATSAPP_DISPLAY}`}
+              title={WHATSAPP_DISPLAY}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e8d5c4]/25 text-[#e8d5c4] transition hover:bg-[#e8d5c4]/10"
+            >
+              <WhatsAppGlyph className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+
+        <p className="mt-4 text-center text-[10px] tracking-[0.05em] text-[#f4ede4]/4">
+          © {year} Ajitha Collection
         </p>
       </div>
     </motion.footer>
