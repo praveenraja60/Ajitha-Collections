@@ -2,39 +2,85 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPoi
 import { useReducedMotion } from 'framer-motion'
 
 /**
- * Hangly-style interactive dreamcatcher.
- * Physics painted via DOM refs (no React re-render each frame) for a smooth site.
- * Slow, heavy swing so it feels like a real hanging charm.
+ * Dreamcatcher with elastic pull + correct left/right direction.
+ * Drag right → swings right. Pull stretches like elastic, then springs back.
  */
 
-const MAX_ANGLE = 0.55
-/** Higher length + softer gravity = slower, more realistic dance */
-const GRAVITY = 4.2
-const LENGTH = 2.4
-const DAMPING = 0.992
-const IDLE_AMP = 0.028
-const IDLE_SPEED = 0.28
+const MAX_ANGLE = 0.85
+const GRAVITY = 11
+const LENGTH = 1.35
+const DAMPING = 0.988
+const SPRING = 18 // elastic return strength
+const IDLE_AMP = 0.03
+const IDLE_SPEED = 0.3
 
 export default function DreamcatcherCharm() {
   const reduce = useReducedMotion()
+  const rootRef = useRef<HTMLElement>(null)
   const pivotRef = useRef<HTMLDivElement>(null)
   const swingRef = useRef<HTMLDivElement>(null)
+  const stretchRef = useRef<HTMLDivElement>(null)
   const angleRef = useRef(0)
   const velRef = useRef(0)
+  const stretchRefN = useRef(0)
+  const stretchVelRef = useRef(0)
+  const targetAngleRef = useRef(0)
   const draggingRef = useRef(false)
+  const pointerIdRef = useRef<number | null>(null)
   const lastTRef = useRef(0)
+  const lastARef = useRef(0)
   const idleTRef = useRef(0)
   const visibleRef = useRef(true)
   const [dragging, setDragging] = useState(false)
 
-  const paint = useCallback((a: number) => {
-    angleRef.current = a
-    const el = swingRef.current
-    if (el) el.style.transform = `rotate(${(a * 180) / Math.PI}deg)`
+  const paint = useCallback((angle: number, stretch = stretchRefN.current) => {
+    angleRef.current = angle
+    stretchRefN.current = stretch
+    const swing = swingRef.current
+    const cord = stretchRef.current
+    if (swing) {
+      // Negate so finger RIGHT → charm swings RIGHT (CSS clockwise vs screen coords)
+      swing.style.transform = `rotate(${(-angle * 180) / Math.PI}deg)`
+    }
+    if (cord) {
+      // Elastic stretch on the hanging cord
+      const s = 1 + stretch * 0.22
+      cord.style.transform = `scaleY(${s})`
+    }
+  }, [])
+
+  /** Screen: +x right, +y down. Positive angle = pull to the RIGHT. */
+  const pointerToAngle = useCallback((clientX: number, clientY: number) => {
+    const pivot = pivotRef.current
+    if (!pivot) return { angle: 0, stretch: 0 }
+    const r = pivot.getBoundingClientRect()
+    const px = r.left + r.width / 2
+    const py = r.top + r.height / 2
+    const dx = clientX - px
+    const dy = Math.max(40, clientY - py)
+    // atan2(dx, dy): +dx (right) → +angle
+    const raw = Math.atan2(dx, dy)
+    const angle = Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, raw))
+    // Extra pull past soft limit becomes elastic stretch (0..1)
+    const dist = Math.hypot(dx, dy)
+    const rest = 120
+    const stretch = Math.max(0, Math.min(1.15, (dist - rest) / 140))
+    return { angle, stretch }
+  }, [])
+
+  const endDrag = useCallback(() => {
+    if (!draggingRef.current) return
+    draggingRef.current = false
+    pointerIdRef.current = null
+    setDragging(false)
+    document.body.style.overflow = ''
+    document.body.style.touchAction = ''
+    // Keep throw velocity for elastic swing-out
+    velRef.current = Math.max(-3.2, Math.min(3.2, velRef.current))
   }, [])
 
   useEffect(() => {
-    const root = swingRef.current?.closest('.dreamcatcher-charm')
+    const root = rootRef.current
     if (!root) return
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -55,22 +101,41 @@ export default function DreamcatcherCharm() {
       const dt = Math.min(0.033, (now - last) / 1000)
       last = now
 
-      if (visibleRef.current && !draggingRef.current) {
-        const accel = (-GRAVITY / LENGTH) * Math.sin(angleRef.current)
+      if (!visibleRef.current) {
+        frame = requestAnimationFrame(tick)
+        return
+      }
+
+      if (draggingRef.current) {
+        // Elastic follow: spring toward finger (not hard lock)
+        const target = targetAngleRef.current
+        const diff = target - angleRef.current
+        velRef.current = (velRef.current + diff * SPRING * dt) * 0.86
+        const next = angleRef.current + velRef.current * dt
+        // Stretch settles slightly toward pull stretch while dragging (set in move)
+        paint(next, stretchRefN.current)
+      } else {
+        // Pendulum + spring to center when large
+        const accel =
+          (-GRAVITY / LENGTH) * Math.sin(angleRef.current) - angleRef.current * 1.2
         velRef.current = (velRef.current + accel * dt) * DAMPING
 
-        if (Math.abs(velRef.current) < 0.04 && Math.abs(angleRef.current) < 0.04) {
+        // Elastic stretch springs back to 0
+        stretchVelRef.current =
+          (stretchVelRef.current + (0 - stretchRefN.current) * 22 * dt) * 0.9
+        const nextStretch = Math.max(0, stretchRefN.current + stretchVelRef.current * dt)
+
+        if (Math.abs(velRef.current) < 0.04 && Math.abs(angleRef.current) < 0.04 && nextStretch < 0.02) {
           idleTRef.current += dt
-          paint(Math.sin(idleTRef.current * IDLE_SPEED) * IDLE_AMP)
+          paint(Math.sin(idleTRef.current * IDLE_SPEED) * IDLE_AMP, 0)
+          stretchVelRef.current = 0
         } else {
           idleTRef.current = 0
           let next = angleRef.current + velRef.current * dt
           next = Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, next))
-          if (Math.abs(next) >= MAX_ANGLE) velRef.current *= -0.28
-          paint(next)
-          if (Math.abs(velRef.current) < 0.0015 && Math.abs(next) < 0.0015) {
-            velRef.current = 0
-          }
+          if (Math.abs(next) >= MAX_ANGLE) velRef.current *= -0.45
+          paint(next, nextStretch)
+          if (Math.abs(velRef.current) < 0.001 && Math.abs(next) < 0.001) velRef.current = 0
         }
       }
 
@@ -81,86 +146,94 @@ export default function DreamcatcherCharm() {
     return () => cancelAnimationFrame(frame)
   }, [reduce, paint])
 
-  const pointerToAngle = useCallback((clientX: number, clientY: number) => {
-    const pivot = pivotRef.current
-    if (!pivot) return 0
-    const r = pivot.getBoundingClientRect()
-    const px = r.left + r.width / 2
-    const py = r.top + r.height / 2
-    return Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, Math.atan2(clientX - px, clientY - py)))
-  }, [])
-
-  const onPointerDown = useCallback(
-    (e: ReactPointerEvent<HTMLDivElement>) => {
-      if (reduce) return
-      e.preventDefault()
-      e.stopPropagation()
-      e.currentTarget.setPointerCapture(e.pointerId)
-      draggingRef.current = true
-      setDragging(true)
-      velRef.current = 0
-      lastTRef.current = performance.now()
-      paint(pointerToAngle(e.clientX, e.clientY))
-    },
-    [paint, pointerToAngle, reduce],
-  )
-
-  const onPointerMove = useCallback(
-    (e: ReactPointerEvent<HTMLDivElement>) => {
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
       if (!draggingRef.current) return
+      if (pointerIdRef.current != null && e.pointerId !== pointerIdRef.current) return
       e.preventDefault()
       const now = performance.now()
-      const a = pointerToAngle(e.clientX, e.clientY)
-      const dt = Math.max(0.01, (now - lastTRef.current) / 1000)
-      velRef.current = (a - angleRef.current) / dt
+      const { angle, stretch } = pointerToAngle(e.clientX, e.clientY)
+      const dt = Math.max(0.012, (now - lastTRef.current) / 1000)
+      velRef.current = (angle - lastARef.current) / dt
+      lastARef.current = angle
       lastTRef.current = now
-      paint(a)
-    },
-    [paint, pointerToAngle],
-  )
-
-  const onPointerUp = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
-    if (!draggingRef.current) return
-    draggingRef.current = false
-    setDragging(false)
-    try {
-      e.currentTarget.releasePointerCapture(e.pointerId)
-    } catch {
-      /* already released */
+      targetAngleRef.current = angle
+      stretchRefN.current = stretch
+      stretchVelRef.current = 0
     }
-    // Soft throw — charm settles slowly
-    velRef.current = Math.max(-2.2, Math.min(2.2, velRef.current * 0.85))
-  }, [])
+
+    const onUp = (e: PointerEvent) => {
+      if (!draggingRef.current) return
+      if (pointerIdRef.current != null && e.pointerId !== pointerIdRef.current) return
+      endDrag()
+    }
+
+    window.addEventListener('pointermove', onMove, { passive: false })
+    window.addEventListener('pointerup', onUp)
+    window.addEventListener('pointercancel', onUp)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('pointercancel', onUp)
+    }
+  }, [endDrag, pointerToAngle])
+
+  const onPointerDown = (e: ReactPointerEvent<HTMLButtonElement>) => {
+    if (reduce) return
+    e.preventDefault()
+    e.stopPropagation()
+    pointerIdRef.current = e.pointerId
+    draggingRef.current = true
+    setDragging(true)
+    velRef.current = 0
+    lastTRef.current = performance.now()
+    const { angle, stretch } = pointerToAngle(e.clientX, e.clientY)
+    lastARef.current = angle
+    targetAngleRef.current = angle
+    stretchRefN.current = stretch
+    paint(angle, stretch)
+    document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {
+      /* ok */
+    }
+  }
 
   return (
     <aside
-      className="dreamcatcher-charm fixed top-0 left-0 z-40 select-none sm:left-1 lg:left-2"
-      aria-label="Interactive hanging dreamcatcher — drag to swing"
+      ref={rootRef}
+      className="dreamcatcher-charm fixed top-0 left-0 z-40 select-none sm:left-2 lg:left-3"
+      aria-label="Dreamcatcher — pull to swing"
     >
       <div ref={pivotRef} className="absolute top-0 left-1/2 h-1 w-1 -translate-x-1/2" />
 
-      <div ref={swingRef} className="origin-top touch-none will-change-transform">
-        <div className="relative mx-auto flex w-8 flex-col items-center sm:w-10">
-          <div className="h-[4.5rem] w-[1.5px] rounded-full bg-gradient-to-b from-[#c4a484]/80 via-[#564438] to-[#564438] sm:h-20 lg:h-24" />
-          <div className="absolute top-4 h-1.5 w-1.5 rounded-full bg-[#c4a484] shadow-sm" />
-          <div className="absolute top-10 h-1 w-1 rounded-full bg-[#564438]/80 sm:top-12" />
+      <div ref={swingRef} className="origin-top will-change-transform" style={{ touchAction: 'none' }}>
+        <div
+          ref={stretchRef}
+          className="relative mx-auto flex w-10 origin-top flex-col items-center will-change-transform"
+        >
+          <div className="h-16 w-[2px] rounded-full bg-gradient-to-b from-[#c4a484] via-[#564438] to-[#46362c] sm:h-20 lg:h-[5.5rem]" />
+          <div className="absolute top-5 h-1.5 w-1.5 rounded-full bg-[#c4a484]" />
+          <div className="absolute top-11 h-1 w-1 rounded-full bg-[#564438]/90" />
         </div>
 
-        <div
-          role="img"
-          aria-label="Dreamcatcher charm"
-          className={`relative cursor-grab active:cursor-grabbing ${dragging ? 'scale-[1.02]' : ''} transition-transform duration-200`}
-          style={{ touchAction: 'none' }}
+        <button
+          type="button"
+          aria-label="Pull dreamcatcher"
+          className={`dreamcatcher-charm__hit relative -mt-0.5 flex cursor-grab items-start justify-center border-0 bg-transparent p-0 active:cursor-grabbing ${
+            dragging ? 'scale-[1.03]' : ''
+          } transition-transform duration-150`}
+          style={{ touchAction: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}
           onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
         >
           <svg
             viewBox="0 0 120 220"
-            className="h-[10.5rem] w-[5.5rem] drop-shadow-[0_10px_20px_rgba(70,54,44,0.2)] sm:h-[13rem] sm:w-[6.75rem] lg:h-[15rem] lg:w-[7.75rem]"
+            className="h-[9.5rem] w-[5rem] drop-shadow-[0_10px_20px_rgba(70,54,44,0.22)] sm:h-[12rem] sm:w-[6.25rem] lg:h-[14rem] lg:w-[7.25rem]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
           >
             <circle cx="60" cy="48" r="36" stroke="#564438" strokeWidth="3.4" fill="#faf6f1" fillOpacity="0.62" />
             <circle cx="60" cy="48" r="32.5" stroke="#c4a484" strokeWidth="1.35" opacity="0.9" />
@@ -224,11 +297,11 @@ export default function DreamcatcherCharm() {
             </g>
           </svg>
           {!dragging && (
-            <span className="pointer-events-none absolute -bottom-1 left-1/2 hidden -translate-x-1/2 whitespace-nowrap text-[8px] tracking-[0.18em] text-burgundy/45 uppercase sm:block">
-              Drag me
+            <span className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap text-[8px] tracking-[0.16em] text-burgundy/50 uppercase">
+              Pull
             </span>
           )}
-        </div>
+        </button>
       </div>
     </aside>
   )

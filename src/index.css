@@ -230,33 +230,40 @@ img {
   contain-intrinsic-size: 1px 640px;
 }
 
-/* Hangly-style charm: interactive hit-target only on the charm body */
+/* Dreamcatcher — large touch target for elastic pull */
 .dreamcatcher-charm {
   z-index: 40;
-  width: 5.5rem;
+  width: 5.25rem;
   pointer-events: none;
 }
 
-.dreamcatcher-charm [role='img'] {
+.dreamcatcher-charm__hit {
   pointer-events: auto;
+  min-width: 72px;
+  min-height: 110px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (min-width: 640px) {
   .dreamcatcher-charm {
-    width: 6.75rem;
+    width: 6.5rem;
+  }
+
+  .dreamcatcher-charm__hit {
+    min-width: 90px;
+    min-height: 130px;
   }
 }
 
 @media (min-width: 1024px) {
   .dreamcatcher-charm {
-    width: 7.75rem;
+    width: 7.5rem;
   }
 }
 
 @media (max-width: 639px) {
   .dreamcatcher-charm {
-    left: 0;
-    opacity: 0.95;
+    left: 0.15rem;
   }
 }
 
