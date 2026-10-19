@@ -6,7 +6,7 @@ import { preloadMany } from '../lib/preload'
 import Lightbox from './Lightbox'
 
 const INTERVAL_MS = 4500
-const FADE_S = 0.6
+const FADE_S = 0.45
 
 export default function ProductGallery({ product }: { product: ShopProduct }) {
   const images = product.images
@@ -19,7 +19,6 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
   useEffect(() => {
     setI(0)
     setOpen(false)
-    // Preload only first pair — keeps product pages snappy
     preloadMany(images.slice(0, 2).map((img) => img.src))
   }, [product.id, images])
 
@@ -66,7 +65,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
   return (
     <div className="w-full min-w-0 overflow-x-clip">
       <div
-        className="relative overflow-hidden bg-cream"
+        className="relative overflow-hidden rounded-[12px] bg-gradient-to-b from-cream to-beige/60"
         onPointerEnter={hold}
         onTouchStart={(e) => onTouchStart(e.changedTouches[0].clientX)}
         onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
@@ -96,17 +95,17 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
               type="button"
               aria-label="Previous image"
               onClick={() => go(i - 1)}
-              className="absolute top-1/2 left-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-[10px] bg-white/90 text-ink"
+              className="media-btn absolute top-1/2 left-2 z-10 -translate-y-1/2"
             >
-              <ChevronLeft size={20} strokeWidth={1.5} />
+              <ChevronLeft size={20} strokeWidth={1.6} />
             </button>
             <button
               type="button"
               aria-label="Next image"
               onClick={() => go(i + 1)}
-              className="absolute top-1/2 right-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-[10px] bg-white/90 text-ink"
+              className="media-btn absolute top-1/2 right-2 z-10 -translate-y-1/2"
             >
-              <ChevronRight size={20} strokeWidth={1.5} />
+              <ChevronRight size={20} strokeWidth={1.6} />
             </button>
           </>
         )}
@@ -118,30 +117,30 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
             hold()
             setOpen(true)
           }}
-          className="absolute top-2 right-2 z-10 flex h-10 w-10 items-center justify-center rounded-[10px] bg-white/90 text-ink"
+          className="media-btn absolute top-2 right-2 z-10"
         >
-          <ZoomIn size={16} strokeWidth={1.5} />
+          <ZoomIn size={16} strokeWidth={1.6} />
         </button>
       </div>
 
-      <p className="mt-2 text-xs tracking-wide text-muted">
+      <p className="mt-1.5 text-[11px] tracking-wide text-muted">
         {current.label} · {i + 1} of {images.length}
       </p>
 
       {images.length > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="mt-2 flex gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide">
           {images.map((img, idx) => (
             <button
               key={img.src}
               type="button"
               onClick={() => go(idx)}
-              className={`relative h-[76px] w-[60px] shrink-0 overflow-hidden border bg-cream sm:h-[88px] sm:w-[70px] ${
-                idx === i ? 'border-ink' : 'border-beige'
+              className={`relative h-[68px] w-[54px] shrink-0 overflow-hidden rounded-lg border-2 bg-cream sm:h-[78px] sm:w-[62px] ${
+                idx === i ? 'border-rose shadow-[0_0_0_1px_rgba(183,110,121,0.25)]' : 'border-beige'
               }`}
               aria-label={`View ${img.label}`}
               aria-current={idx === i}
             >
-              <img src={img.src} alt="" width={68} height={84} decoding="async" className="h-full w-full object-contain" />
+              <img src={img.src} alt="" width={62} height={78} decoding="async" className="h-full w-full object-cover object-top" />
             </button>
           ))}
         </div>

@@ -11,7 +11,7 @@ export default function FeaturedCollections() {
       <div className="mx-auto max-w-7xl">
         <Reveal className="mb-3.5 text-center">
           <p className="eyebrow">Browse</p>
-          <h2 className="section-title mt-1.5 font-sans text-[1.7rem] sm:text-[2rem]">Shop by category</h2>
+          <h2 className="section-title mt-1.5 text-[2rem] sm:text-[2.35rem]">Shop by category</h2>
         </Reveal>
         <motion.div
           variants={stagger}

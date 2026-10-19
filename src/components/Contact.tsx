@@ -11,7 +11,7 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={view}
         transition={{ duration: 0.3, ease: easeLuxury }}
-        className="mx-auto grid max-w-7xl overflow-hidden rounded-[10px] border border-beige bg-white md:grid-cols-2"
+        className="mx-auto grid max-w-7xl overflow-hidden rounded-[14px] border border-beige bg-ivory/85 md:grid-cols-2"
       >
         <div className="overflow-hidden">
           <motion.img
@@ -26,7 +26,7 @@ export default function Contact() {
         </div>
         <div className="flex flex-col justify-center px-5 py-6 sm:px-8">
           <p className="eyebrow">Contact</p>
-          <h2 className="mt-1 font-sans text-[1.75rem] sm:text-3xl">Let’s create your outfit</h2>
+          <h2 className="mt-1 text-[1.9rem] sm:text-[2.4rem]">Let’s create your outfit</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">
             Share a reference on WhatsApp or Instagram — we’ll help with fabric, fitting and custom stitching.
           </p>

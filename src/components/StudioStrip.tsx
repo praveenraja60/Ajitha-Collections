@@ -12,15 +12,18 @@ export default function StudioStrip() {
         transition={{ duration: 0.28, ease: easeLuxury }}
         className="mx-auto max-w-7xl"
       >
-        <div className="relative overflow-hidden rounded-[10px] bg-burgundy px-5 py-5 text-white sm:px-8 sm:py-6">
-          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative overflow-hidden rounded-[14px] bg-gradient-to-r from-wine via-burgundy to-rose px-5 py-5 text-ivory sm:px-8 sm:py-6">
+          <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-[10px] tracking-[0.32em] uppercase text-white/80">The boutique</p>
-              <p className="mt-2 max-w-xl font-sans text-xl leading-snug text-white sm:text-2xl">
+              <p className="text-[10px] tracking-[0.32em] uppercase text-gold/90">The boutique</p>
+              <p className="mt-1.5 max-w-xl font-sans text-xl leading-snug text-ivory sm:text-2xl">
                 Dresses designed around you — browse, choose, order.
               </p>
             </div>
-            <Link to="/products" className="btn shrink-0 border-white/40 bg-white text-burgundy hover:bg-ivory hover:text-burgundy">
+            <Link
+              to="/products"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-[10px] border border-gold/50 bg-gold/95 px-6 text-[12px] font-semibold tracking-[0.1em] text-wine uppercase transition hover:bg-ivory"
+            >
               Shop the edit
             </Link>
           </div>

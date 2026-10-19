@@ -104,7 +104,7 @@ export default function ProductRail({
         <Reveal className="mb-3 flex items-end justify-between gap-3">
           <div>
             <p className="eyebrow">{eyebrow}</p>
-            <h2 className="mt-1.5 font-sans text-[1.7rem] leading-tight sm:text-[2rem]">{title}</h2>
+            <h2 className="mt-1.5 text-[1.85rem] leading-tight sm:text-[2.2rem]">{title}</h2>
           </div>
           <div className="flex gap-1">
             <button

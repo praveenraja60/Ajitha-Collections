@@ -58,7 +58,7 @@ export default function Hero() {
               type="button"
               aria-label="Previous slide"
               onClick={() => go(i - 1)}
-              className="absolute top-1/2 left-2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[10px] bg-white/90 text-ink shadow-sm sm:left-4"
+              className="media-btn absolute top-1/2 left-2 z-10 h-11 w-11 -translate-y-1/2 sm:left-4"
               whileTap={{ scale: 0.94 }}
             >
               <ChevronLeft size={20} strokeWidth={1.5} />
@@ -67,7 +67,7 @@ export default function Hero() {
               type="button"
               aria-label="Next slide"
               onClick={() => go(i + 1)}
-              className="absolute top-1/2 right-2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[10px] bg-white/90 text-ink shadow-sm sm:right-4"
+              className="media-btn absolute top-1/2 right-2 z-10 h-11 w-11 -translate-y-1/2 sm:right-4"
               whileTap={{ scale: 0.94 }}
             >
               <ChevronRight size={20} strokeWidth={1.5} />

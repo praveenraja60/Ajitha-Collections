@@ -22,7 +22,7 @@ export default function InstagramGallery() {
         <Reveal className="flex items-end justify-between gap-3">
           <div>
             <p className="eyebrow">Studio</p>
-            <h2 className="mt-1 font-sans text-[1.75rem] sm:text-3xl">On Instagram</h2>
+            <h2 className="mt-1 text-[1.9rem] sm:text-[2.4rem]">On Instagram</h2>
           </div>
           <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="text-[11px] tracking-[0.2em] text-burgundy uppercase">
             {INSTAGRAM_HANDLE}

@@ -61,10 +61,10 @@ export default function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.25, ease: easeLuxury }}
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-300 ${
+      className={`site-glass fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-300 ${
         scrolled
-          ? 'border-beige/80 bg-canvas/95 shadow-[0_6px_20px_rgba(70,54,44,0.05)]'
-          : 'border-beige bg-canvas/98'
+          ? 'border-beige/70 shadow-[0_10px_30px_rgba(60,40,32,0.08)]'
+          : 'border-beige/50'
       }`}
     >
       <nav
@@ -89,7 +89,9 @@ export default function Navbar() {
           >
             Ajitha
           </span>
-          <span className="hidden text-[11px] font-semibold tracking-[0.18em] text-ink uppercase sm:inline">Collections</span>
+          <span className="hidden font-display text-[13px] font-semibold tracking-[0.22em] text-burgundy/80 uppercase sm:inline">
+            Collection
+          </span>
         </Link>
 
         <ul className="hidden items-center gap-5 min-[1100px]:flex">
@@ -110,7 +112,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.98 }}
                   transition={{ duration: 0.22, ease: easeLuxury }}
-                  className="absolute left-0 top-8 z-20 min-w-[160px] rounded-[10px] border border-beige bg-white p-2 shadow-sm"
+                  className="absolute left-0 top-8 z-20 min-w-[160px] rounded-[10px] border border-beige bg-ivory p-2 shadow-sm"
                 >
                   {CATEGORIES.map((c) => (
                     <li key={c}>
@@ -167,13 +169,13 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-beige bg-white px-4 py-2.5"
+            className="overflow-hidden border-t border-beige bg-ivory px-4 py-2.5"
           >
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search dresses…"
-              className="w-full rounded-[10px] border border-beige bg-white px-4 py-2.5 text-sm outline-none"
+              className="w-full rounded-[10px] border border-beige bg-cream/70 px-4 py-2.5 text-sm outline-none"
             />
           </motion.form>
         )}
@@ -186,7 +188,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: easeLuxury }}
-            className="flex flex-col overflow-hidden border-t border-beige bg-white px-5 py-3 min-[1100px]:hidden"
+            className="flex flex-col overflow-hidden border-t border-beige bg-ivory px-5 py-3 min-[1100px]:hidden"
           >
             <li><Link to="/" className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>Home</Link></li>
             <li><Link to="/products" className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>Shop</Link></li>

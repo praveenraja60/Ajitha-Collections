@@ -12,7 +12,7 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
 
   return (
     <article className="group min-w-0 transition-transform duration-200 ease-out hover:-translate-y-1 active:scale-[0.99]">
-      <div className="relative overflow-hidden rounded-[10px] bg-cream">
+      <div className="relative overflow-hidden rounded-[12px] bg-gradient-to-b from-cream to-beige/70 ring-1 ring-beige/80">
         <Link to={`/products/${product.id}`} className="block">
           <img
             src={product.main.src}
@@ -41,21 +41,16 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
           type="button"
           aria-label={loved ? 'Remove from wishlist' : 'Add to wishlist'}
           onClick={() => setLoved(toggleWishlist(product.id).includes(product.id))}
-          className="icon-btn absolute top-1.5 right-1.5 z-10 min-h-10 min-w-10 rounded-full bg-white/90 text-ink shadow-sm"
+          className={`like-btn absolute top-2 right-2 z-10 ${loved ? 'is-loved' : ''}`}
         >
-          <Heart
-            size={17}
-            strokeWidth={1.5}
-            fill={loved ? 'currentColor' : 'none'}
-            className={loved ? 'text-burgundy' : ''}
-          />
+          <Heart size={17} strokeWidth={1.6} fill={loved ? 'currentColor' : 'none'} />
         </button>
       </div>
-      <div className="pt-2.5 text-center">
-        <h3 className="font-sans text-[13px] font-normal tracking-[0.04em] text-ink">
+      <div className="pt-2 text-center">
+        <h3 className="font-display text-[15px] font-semibold tracking-[0.02em] text-ink">
           <Link to={`/products/${product.id}`}>{product.name}</Link>
         </h3>
-        <p className="mt-0.5 text-[12px] tracking-[0.02em] text-muted">{product.priceLabel}</p>
+        <p className="mt-0.5 text-[12px] tracking-[0.02em] text-rose/90">{product.priceLabel}</p>
       </div>
     </article>
   )
