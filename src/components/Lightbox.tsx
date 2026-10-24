@@ -41,7 +41,7 @@ export default function Lightbox({ images, index, onIndex, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-[80] flex flex-col bg-plum/95" role="dialog" aria-modal="true" aria-label="Image viewer">
-      <div className="flex items-center justify-between px-4 py-3 text-ivory">
+      <div className="flex items-center justify-between px-4 py-3 text-champagne">
         <p className="text-sm tracking-wide">{current.label} · {index + 1} / {images.length}</p>
         <div className="flex gap-1">
           <button type="button" className="rounded-full p-2 hover:bg-white/10" aria-label={zoom ? 'Zoom out' : 'Zoom in'} onClick={() => setZoom((z) => !z)}>

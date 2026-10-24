@@ -50,7 +50,7 @@ export default function InstagramGallery() {
                 variants={imageZoom}
                 className="h-full w-full object-cover object-top transition duration-700 ease-out group-hover:scale-110 group-active:scale-105"
               />
-              <span className="absolute inset-0 flex items-center justify-center bg-plum/40 text-ivory opacity-0 transition duration-500 group-hover:opacity-100 group-active:opacity-100">
+              <span className="absolute inset-0 flex items-center justify-center bg-wine/50 text-champagne opacity-0 transition duration-500 group-hover:opacity-100 group-active:opacity-100">
                 <InstagramGlyph className="h-5 w-5" />
               </span>
             </motion.a>

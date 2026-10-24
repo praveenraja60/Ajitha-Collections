@@ -96,7 +96,7 @@ export default function ProductDetailsPage() {
                 onClick={() => setSize(s)}
                 className={`min-h-10 min-w-10 rounded-full border px-3 py-1.5 text-xs tracking-[0.08em] transition ${
                   selectedSize === s
-                    ? 'border-rose bg-rose text-white shadow-[0_6px_16px_rgba(183,110,121,0.35)]'
+                    ? 'border-amber bg-amber text-champagne shadow-[0_6px_16px_rgba(196,98,45,0.35)]'
                     : 'border-beige bg-cream/60 text-ink hover:border-gold'
                 }`}
               >

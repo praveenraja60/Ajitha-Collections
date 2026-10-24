@@ -32,7 +32,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="site-footer relative overflow-hidden text-[#f4ede4]"
+      className="site-footer relative overflow-hidden border-t border-gold/20 text-champagne"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}
@@ -43,24 +43,24 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(800px 360px at 15% 0%, rgba(232,213,196,0.12), transparent 55%), linear-gradient(165deg, #3a2c24 0%, #46362c 50%, #2f241e 100%)',
+            'radial-gradient(700px 320px at 12% 0%, rgba(196,98,45,0.22), transparent 55%), linear-gradient(165deg, #3a2a22 0%, #2a1e18 55%, #1a1310 100%)',
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#e8d5c4]/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8">
         <div className="flex flex-col items-center text-center">
-          <p className="text-[10px] tracking-[0.32em] text-[#e8d5c4]/70 uppercase">The atelier</p>
-          <p className="mt-2 font-script text-[3rem] leading-none text-[#e8d5c4] sm:text-[3.6rem]">
+          <p className="text-[10px] tracking-[0.32em] text-gold uppercase">The atelier</p>
+          <p className="mt-2 font-script text-[3rem] leading-none text-gold sm:text-[3.6rem]">
             Ajitha
           </p>
-          <p className="mt-1 text-[10px] font-semibold tracking-[0.36em] text-[#f4ede4]/7 uppercase">
+          <p className="mt-1 text-[10px] font-semibold tracking-[0.36em] text-champagne/80 uppercase">
             Collection
           </p>
-          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-[#f4ede4]/65">
+          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-muted">
             Your style. Your design. Our craft.
           </p>
         </div>
@@ -70,34 +70,34 @@ export default function Footer() {
             href={whatsappLink()}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] bg-[#e8d5c4] px-5 text-[11px] font-semibold tracking-[0.12em] text-[#2f241e] uppercase transition hover:bg-[#f4ede4]"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-amber px-5 text-[11px] font-semibold tracking-[0.12em] text-champagne uppercase transition hover:bg-[#d4783a]"
           >
             <WhatsAppGlyph className="h-4 w-4" />
             Order on WhatsApp
           </a>
-          <div className="inline-flex min-h-11 items-center justify-center rounded-[10px] border border-[#e8d5c4]/25 px-4 text-[10px] tracking-[0.14em] text-[#e8d5c4]/85 uppercase">
+          <div className="inline-flex min-h-11 items-center justify-center rounded-full border border-gold/35 px-4 text-[10px] tracking-[0.14em] text-gold uppercase">
             Made to order · 15 days
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-center gap-3 border-t border-[#e8d5c4]/12 pt-4 sm:flex-row sm:justify-between">
+        <div className="mt-6 flex flex-col items-center gap-3 border-t border-gold/15 pt-4 sm:flex-row sm:justify-between">
           <nav
             aria-label="Footer"
-            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12px] tracking-[0.06em] text-[#f4ede4]/65"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12px] tracking-[0.06em] text-muted"
           >
-            <Link to="/products" className="transition hover:text-[#e8d5c4]">
+            <Link to="/products" className="transition hover:text-gold">
               Shop
             </Link>
-            <button type="button" className="transition hover:text-[#e8d5c4]" onClick={() => goSection('about')}>
+            <button type="button" className="transition hover:text-gold" onClick={() => goSection('about')}>
               About
             </button>
-            <button type="button" className="transition hover:text-[#e8d5c4]" onClick={() => goSection('contact')}>
+            <button type="button" className="transition hover:text-gold" onClick={() => goSection('contact')}>
               Contact
             </button>
-            <Link to="/wishlist" className="transition hover:text-[#e8d5c4]">
+            <Link to="/wishlist" className="transition hover:text-gold">
               Wishlist
             </Link>
-            <Link to="/cart" className="transition hover:text-[#e8d5c4]">
+            <Link to="/cart" className="transition hover:text-gold">
               Cart
             </Link>
           </nav>
@@ -109,7 +109,7 @@ export default function Footer() {
               rel="noreferrer"
               aria-label={INSTAGRAM_HANDLE}
               title={INSTAGRAM_HANDLE}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e8d5c4]/25 text-[#e8d5c4] transition hover:bg-[#e8d5c4]/10"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 text-gold transition hover:bg-gold/10"
             >
               <InstagramGlyph className="h-4 w-4" />
             </a>
@@ -119,14 +119,14 @@ export default function Footer() {
               rel="noreferrer"
               aria-label={`WhatsApp ${WHATSAPP_DISPLAY}`}
               title={WHATSAPP_DISPLAY}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#e8d5c4]/25 text-[#e8d5c4] transition hover:bg-[#e8d5c4]/10"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 text-gold transition hover:bg-gold/10"
             >
               <WhatsAppGlyph className="h-4 w-4" />
             </a>
           </div>
         </div>
 
-        <p className="mt-4 text-center text-[10px] tracking-[0.05em] text-[#f4ede4]/4">
+        <p className="mt-4 text-center text-[10px] tracking-[0.05em] text-muted">
           © {year} Ajitha Collection
         </p>
       </div>
