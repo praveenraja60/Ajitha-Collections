@@ -5,6 +5,7 @@ import { Menu, Search, ShoppingBag, X, Heart } from 'lucide-react'
 import { INSTAGRAM_URL, whatsappLink } from '../lib/whatsapp'
 import { scrollToId } from '../lib/scroll'
 import { useCart } from '../lib/cart'
+import { readWishlist, WISHLIST_EVENT } from '../lib/wishlist'
 import InstagramGlyph from './InstagramGlyph'
 import { CATEGORIES } from '../data/productInfo'
 import { easeLuxury } from '../lib/motion'
@@ -26,17 +27,35 @@ export default function Navbar() {
   const [cats, setCats] = useState(false)
   const [query, setQuery] = useState('')
   const [scrolled, setScrolled] = useState(false)
+  const [wishCount, setWishCount] = useState(0)
   const location = useLocation()
   const navigate = useNavigate()
   const { count } = useCart()
   const onHome = location.pathname === '/'
-  const linkClass = 'text-[13px] font-medium tracking-[0.04em] text-ink/80 transition-colors hover:text-ink'
+  const linkClass =
+    'text-[13px] font-medium tracking-[0.04em] text-champagne/80 transition-colors hover:text-white'
+  const wishLoved = wishCount > 0
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const sync = () => setWishCount(readWishlist().length)
+    sync()
+    const onCustom = (e: Event) => {
+      const detail = (e as CustomEvent<number[]>).detail
+      setWishCount(Array.isArray(detail) ? detail.length : readWishlist().length)
+    }
+    window.addEventListener(WISHLIST_EVENT, onCustom)
+    window.addEventListener('storage', sync)
+    return () => {
+      window.removeEventListener(WISHLIST_EVENT, onCustom)
+      window.removeEventListener('storage', sync)
+    }
   }, [])
 
   function goSection(id: string) {
@@ -61,10 +80,10 @@ export default function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.25, ease: easeLuxury }}
-      className={`site-glass fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-300 ${
+      className={`site-header fixed inset-x-0 top-0 z-50 border-b transition-[background,box-shadow,border-color] duration-300 ${
         scrolled
-          ? 'border-beige/70 shadow-[0_10px_30px_rgba(60,40,32,0.08)]'
-          : 'border-beige/50'
+          ? 'border-burgundy/40 shadow-[0_10px_30px_rgba(20,6,12,0.35)]'
+          : 'border-burgundy/30'
       }`}
     >
       <nav
@@ -83,13 +102,13 @@ export default function Navbar() {
           }}
         >
           <span
-            className={`font-script leading-none text-burgundy transition-[font-size] duration-300 ${
+            className={`font-script leading-none text-gold transition-[font-size] duration-300 ${
               scrolled ? 'text-[28px]' : 'text-[32px]'
             }`}
           >
             Ajitha
           </span>
-          <span className="hidden font-display text-[13px] font-semibold tracking-[0.22em] text-burgundy/80 uppercase sm:inline">
+          <span className="hidden font-display text-[13px] font-semibold tracking-[0.22em] text-champagne/85 uppercase sm:inline">
             Collection
           </span>
         </Link>
@@ -112,13 +131,13 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.98 }}
                   transition={{ duration: 0.22, ease: easeLuxury }}
-                  className="absolute left-0 top-8 z-20 min-w-[160px] rounded-[10px] border border-beige bg-ivory p-2 shadow-sm"
+                  className="absolute left-0 top-8 z-20 min-w-[160px] rounded-[10px] border border-burgundy/40 bg-wine p-2 shadow-lg"
                 >
                   {CATEGORIES.map((c) => (
                     <li key={c}>
                       <Link
                         to={`/products?category=${encodeURIComponent(c)}`}
-                        className="block px-3 py-2 text-sm text-ink hover:bg-cream"
+                        className="block px-3 py-2 text-sm text-champagne/90 hover:bg-burgundy/40 hover:text-white"
                         onClick={() => setCats(false)}
                       >
                         {c}
@@ -141,8 +160,12 @@ export default function Navbar() {
           <button type="button" className="icon-btn" aria-label="Search" onClick={() => setSearchOpen((v) => !v)}>
             <Search size={20} strokeWidth={1.5} />
           </button>
-          <Link to="/wishlist" className="icon-btn" aria-label="Wishlist">
-            <Heart size={20} strokeWidth={1.5} />
+          <Link
+            to="/wishlist"
+            className={`like-btn like-btn--nav ${wishLoved ? 'is-loved' : ''}`}
+            aria-label={wishLoved ? `Wishlist, ${wishCount} saved` : 'Wishlist'}
+          >
+            <Heart size={18} strokeWidth={2} fill={wishLoved ? 'currentColor' : 'none'} />
           </Link>
           <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="icon-btn hidden sm:inline-flex" aria-label="Instagram">
             <InstagramGlyph />
@@ -153,7 +176,7 @@ export default function Navbar() {
           <Link to="/cart" className="icon-btn relative" aria-label="Cart">
             <ShoppingBag size={20} strokeWidth={1.5} />
             {count > 0 && (
-              <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-burgundy" />
+              <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-rose" />
             )}
           </Link>
           <button type="button" className="icon-btn min-[1100px]:hidden" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
@@ -169,13 +192,13 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-beige bg-ivory px-4 py-2.5"
+            className="overflow-hidden border-t border-burgundy/30 bg-wine/95 px-4 py-2.5"
           >
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search dresses…"
-              className="w-full rounded-[10px] border border-beige bg-cream/70 px-4 py-2.5 text-sm outline-none"
+              className="w-full rounded-[10px] border border-burgundy/40 bg-plum/80 px-4 py-2.5 text-sm text-champagne outline-none placeholder:text-champagne/50"
             />
           </motion.form>
         )}
@@ -188,24 +211,24 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: easeLuxury }}
-            className="flex flex-col overflow-hidden border-t border-beige bg-ivory px-5 py-3 min-[1100px]:hidden"
+            className="flex flex-col overflow-hidden border-t border-burgundy/30 bg-wine/95 px-5 py-3 text-champagne min-[1100px]:hidden"
           >
-            <li><Link to="/" className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>Home</Link></li>
-            <li><Link to="/products" className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>Shop</Link></li>
+            <li><Link to="/" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>Home</Link></li>
+            <li><Link to="/products" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>Shop</Link></li>
             {CATEGORIES.map((c) => (
               <li key={c}>
-                <Link to={`/products?category=${encodeURIComponent(c)}`} className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>
+                <Link to={`/products?category=${encodeURIComponent(c)}`} className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>
                   {c}
                 </Link>
               </li>
             ))}
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="block min-h-11 py-3 text-sm" onClick={() => setOpen(false)}>
+              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>
                 WhatsApp
               </a>
             </li>
-            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm" onClick={() => goSection('about')}>About</button></li>
-            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm" onClick={() => goSection('contact')}>Contact</button></li>
+            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-champagne/90" onClick={() => goSection('about')}>About</button></li>
+            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-champagne/90" onClick={() => goSection('contact')}>Contact</button></li>
           </motion.ul>
         )}
       </AnimatePresence>

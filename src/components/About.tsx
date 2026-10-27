@@ -26,7 +26,7 @@ export default function About() {
             {quotes.map((quote) => (
               <motion.blockquote key={quote.line} variants={fadeUp} className="rounded-[12px] border border-beige bg-ivory/80 px-4 py-3.5">
                 <p className="font-sans text-lg italic text-ink sm:text-xl">“{quote.line}”</p>
-                <footer className="mt-1.5 text-[10px] tracking-[0.18em] text-rose uppercase">{quote.note}</footer>
+                <footer className="mt-1.5 text-[10px] tracking-[0.18em] text-burgundy uppercase">{quote.note}</footer>
               </motion.blockquote>
             ))}
           </motion.div>

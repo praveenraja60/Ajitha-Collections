@@ -39,7 +39,7 @@ export default function ProductDetailsPage() {
       <div className="px-4 pt-24 text-center">
         <Seo title="Piece not found | Ajitha Collection" />
         <p>We couldn’t find that piece.</p>
-        <Link to="/products" className="mt-4 inline-block underline decoration-rose underline-offset-4">
+        <Link to="/products" className="mt-4 inline-block underline decoration-burgundy underline-offset-4">
           Back to shop
         </Link>
       </div>
@@ -65,7 +65,7 @@ export default function ProductDetailsPage() {
         <div className="min-w-0 rounded-[14px] border border-beige/80 bg-ivory/70 p-4 sm:p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-[11px] tracking-[0.24em] text-rose uppercase">
+              <p className="text-[11px] tracking-[0.24em] text-burgundy uppercase">
                 {product.category} · {product.id}
               </p>
               <h1 className="mt-1 text-[1.9rem] leading-tight text-ink sm:text-[2.5rem]">
@@ -87,7 +87,7 @@ export default function ProductDetailsPage() {
           </p>
           <p className="mt-2 text-sm leading-relaxed text-muted">{product.description}</p>
 
-          <p className="mt-4 text-[11px] tracking-[0.18em] text-rose uppercase">Size</p>
+          <p className="mt-4 text-[11px] tracking-[0.18em] text-burgundy uppercase">Size</p>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             {(product.sizes ?? ['S', 'M', 'L']).map((s) => (
               <button
@@ -96,8 +96,8 @@ export default function ProductDetailsPage() {
                 onClick={() => setSize(s)}
                 className={`min-h-10 min-w-10 rounded-full border px-3 py-1.5 text-xs tracking-[0.08em] transition ${
                   selectedSize === s
-                    ? 'border-amber bg-amber text-champagne shadow-[0_6px_16px_rgba(196,98,45,0.35)]'
-                    : 'border-beige bg-cream/60 text-ink hover:border-gold'
+                    ? 'border-burgundy bg-burgundy text-white shadow-[0_6px_16px_rgba(158,26,58,0.32)]'
+                    : 'border-beige bg-ivory/80 text-ink hover:border-burgundy/40'
                 }`}
               >
                 {s}
@@ -122,7 +122,7 @@ export default function ProductDetailsPage() {
               >
                 <table className="mt-2 w-full text-left text-xs text-muted">
                   <thead>
-                    <tr className="text-[10px] tracking-wide text-rose uppercase">
+                    <tr className="text-[10px] tracking-wide text-burgundy uppercase">
                       <th className="py-1">Size</th>
                       <th>Bust</th>
                       <th>Waist</th>
@@ -146,18 +146,18 @@ export default function ProductDetailsPage() {
 
           <dl className="mt-3 grid gap-1.5 rounded-[10px] bg-cream/70 p-3 text-sm sm:grid-cols-2">
             <div>
-              <dt className="text-[10px] tracking-wide text-rose uppercase">Availability</dt>
+              <dt className="text-[10px] tracking-wide text-burgundy uppercase">Availability</dt>
               <dd className="text-ink">{product.availability}</dd>
             </div>
             {product.fabric && (
               <div>
-                <dt className="text-[10px] tracking-wide text-rose uppercase">Fabric</dt>
+                <dt className="text-[10px] tracking-wide text-burgundy uppercase">Fabric</dt>
                 <dd className="text-ink">{product.fabric}</dd>
               </div>
             )}
             {product.color && (
               <div>
-                <dt className="text-[10px] tracking-wide text-rose uppercase">Colour</dt>
+                <dt className="text-[10px] tracking-wide text-burgundy uppercase">Colour</dt>
                 <dd className="text-ink">{product.color}</dd>
               </div>
             )}

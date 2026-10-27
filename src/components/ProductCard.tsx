@@ -50,7 +50,7 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
         <h3 className="font-display text-[15px] font-semibold tracking-[0.02em] text-ink">
           <Link to={`/products/${product.id}`}>{product.name}</Link>
         </h3>
-        <p className="mt-0.5 text-[12px] tracking-[0.02em] text-rose/90">{product.priceLabel}</p>
+        <p className="mt-0.5 text-[12px] tracking-[0.02em] text-burgundy/90">{product.priceLabel}</p>
       </div>
     </article>
   )

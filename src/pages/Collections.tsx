@@ -50,13 +50,13 @@ export default function CollectionsPage() {
                   type="button"
                   onClick={() => setCategory(c)}
                   className={`relative shrink-0 overflow-hidden rounded-full border px-4 py-2.5 text-[11px] tracking-[0.14em] uppercase transition-colors ${
-                    active ? 'border-amber text-champagne' : 'border-beige/80 bg-transparent text-champagne/80'
+                    active ? 'border-burgundy text-white' : 'border-beige bg-ivory/70 text-ink'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="shop-chip"
-                      className="absolute inset-0 bg-amber"
+                      className="absolute inset-0 bg-burgundy"
                       transition={springSoft}
                     />
                   )}

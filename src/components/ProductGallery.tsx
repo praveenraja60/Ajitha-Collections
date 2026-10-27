@@ -135,7 +135,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
               type="button"
               onClick={() => go(idx)}
               className={`relative h-[68px] w-[54px] shrink-0 overflow-hidden rounded-lg border-2 bg-cream sm:h-[78px] sm:w-[62px] ${
-                idx === i ? 'border-rose shadow-[0_0_0_1px_rgba(183,110,121,0.25)]' : 'border-beige'
+                idx === i ? 'border-burgundy shadow-[0_0_0_1px_rgba(158,26,58,0.22)]' : 'border-beige'
               }`}
               aria-label={`View ${img.label}`}
               aria-current={idx === i}
