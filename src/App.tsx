@@ -24,7 +24,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <AmbientGlow />
-      {/* <div className="relative z-[1] flex min-h-svh flex-col">
+      <div className="relative z-[1] flex min-h-svh flex-col">
         <Navbar />
         <main className="max-w-[100vw] flex-1 overflow-x-clip pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0">
           <Outlet />
@@ -33,7 +33,7 @@ export default function App() {
         <DreamcatcherCharm />
         <WhatsAppButton />
         <BottomNav />
-      </div> */}
+      </div>
     </MotionConfig>
   );
 }
