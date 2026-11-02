@@ -6,7 +6,7 @@ import StudioStrip from "../components/StudioStrip";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Seo from "../components/Seo";
-// import { products } from '../lib/catalog'
+import { products } from "../lib/catalog";
 
 export default function Home() {
   const list = products

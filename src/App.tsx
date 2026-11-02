@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import Navbar from "./components/Navbar";
@@ -7,9 +7,24 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import BottomNav from "./components/BottomNav";
 import DreamcatcherCharm from "./components/DreamcatcherCharm";
 import AmbientGlow from "./components/AmbientGlow";
+import Maintenance from "./pages/Maintenance";
+
+const LIVE_KEY = "ajitha-live";
+/** Visiting this path unlocks the real site for the browser session. */
+const LIVE_PATH = "/home";
 
 export default function App() {
   const location = useLocation();
+  const commanded = location.pathname === LIVE_PATH;
+  const [live, setLive] = useState(
+    () => sessionStorage.getItem(LIVE_KEY) === "1",
+  );
+
+  useEffect(() => {
+    if (!commanded) return;
+    sessionStorage.setItem(LIVE_KEY, "1");
+    setLive(true);
+  }, [commanded]);
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -20,6 +35,10 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location.pathname]);
+
+  if (!live && !commanded) {
+    return <Maintenance />;
+  }
 
   return (
     <MotionConfig reducedMotion="user">
