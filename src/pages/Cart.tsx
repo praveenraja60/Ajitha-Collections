@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCart, cartWhatsAppText } from '../lib/cart'
-import { getProduct } from '../lib/catalog'
+import { useDresses } from '../lib/dresses'
 import Seo from '../components/Seo'
 import { whatsappLink } from '../lib/whatsapp'
 
 export default function CartPage() {
   const { lines, setQty, remove, clear, count } = useCart()
+  const { getProduct } = useDresses()
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-6 pt-[4.25rem] sm:px-6">

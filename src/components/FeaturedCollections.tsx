@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CATEGORIES } from '../data/productInfo'
-import { categoryCover } from '../lib/catalog'
+import { useDresses } from '../lib/dresses'
 import { easeLuxury, fadeScale, imageZoom, stagger, view } from '../lib/motion'
 import Reveal from './Reveal'
 
 export default function FeaturedCollections() {
+  const { categoryCover } = useDresses()
   return (
     <section className="content-auto px-4 py-4 sm:px-6 sm:py-5">
       <div className="mx-auto max-w-7xl">

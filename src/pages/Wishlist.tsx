@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
-import { getProduct } from '../lib/catalog'
+import { useDresses } from '../lib/dresses'
 import { readWishlist } from '../lib/wishlist'
 import ProductCard from '../components/ProductCard'
 import Seo from '../components/Seo'
 import { useMemo, useState } from 'react'
 
 export default function WishlistPage() {
+  const { getProduct } = useDresses()
   const [ids] = useState(() => (typeof window === 'undefined' ? [] : readWishlist()))
   const list = useMemo(() => ids.map((id) => getProduct(id)).filter((p): p is NonNullable<typeof p> => Boolean(p)), [ids])
 

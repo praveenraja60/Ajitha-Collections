@@ -7,10 +7,13 @@ import CollectionsPage from './pages/Collections.tsx'
 import ProductDetailsPage from './pages/ProductDetails.tsx'
 import CartPage from './pages/Cart.tsx'
 import WishlistPage from './pages/Wishlist.tsx'
+import DressTable from './pages/DressTable.tsx'
 import { CartProvider } from './lib/cart.tsx'
+import { DressProvider } from './lib/dresses.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <CartProvider>
+    <DressProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<App />}>
@@ -22,9 +25,11 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/collections/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/dress/table" element={<DressTable />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </DressProvider>
   </CartProvider>,
 )

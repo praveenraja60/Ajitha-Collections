@@ -1,0 +1,456 @@
+{
+  "dresses": [
+    {
+      "id": 6,
+      "parentName": "Mankatha Trisha Dress Top & Skirt",
+      "category": "Occasion",
+      "variations": [
+        {
+          "key": "6",
+          "price": "2000",
+          "images": [
+            {
+              "id": "6.jpeg",
+              "src": "/images/6.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "6.1",
+          "price": "2000",
+          "images": [
+            {
+              "id": "6.1.jpeg",
+              "src": "/images/6.1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "6.2",
+          "price": "2000",
+          "images": [
+            {
+              "id": "6.2.jpeg",
+              "src": "/images/6.2.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "6.3",
+          "price": "2000",
+          "images": [
+            {
+              "id": "6.3.jpeg",
+              "src": "/images/6.3.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 19,
+      "parentName": "Darsha Gupta Trending Black Dhavani Set",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "19",
+          "price": "2500",
+          "images": [
+            {
+              "id": "1794433414851-6bqamf.jpg",
+              "src": "/dress-images/1794433414851-6bqamf.jpg"
+            },
+            {
+              "id": "1794433414887-jqubgf.jpg",
+              "src": "/dress-images/1794433414887-jqubgf.jpg"
+            },
+            {
+              "id": "1794433414919-n2z1v0.jpg",
+              "src": "/dress-images/1794433414919-n2z1v0.jpg"
+            },
+            {
+              "id": "1794433414965-y8g72t.jpg",
+              "src": "/dress-images/1794433414965-y8g72t.jpg"
+            },
+            {
+              "id": "1794433415040-g173qg.jpg",
+              "src": "/dress-images/1794433415040-g173qg.jpg"
+            },
+            {
+              "id": "1794433415134-oa02e0.jpg",
+              "src": "/dress-images/1794433415134-oa02e0.jpg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 20,
+      "parentName": "Velvet Work, Top Skit",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "20",
+          "price": "2000",
+          "images": [
+            {
+              "id": "1794433504011-vn9zri.jpg",
+              "src": "/dress-images/1794433504011-vn9zri.jpg"
+            },
+            {
+              "id": "1794433504060-cfubfv.jpg",
+              "src": "/dress-images/1794433504060-cfubfv.jpg"
+            },
+            {
+              "id": "1794433504166-obhmjm.jpg",
+              "src": "/dress-images/1794433504166-obhmjm.jpg"
+            },
+            {
+              "id": "1794433504369-xyxllm.jpg",
+              "src": "/dress-images/1794433504369-xyxllm.jpg"
+            },
+            {
+              "id": "1794433504451-teuxh2.jpg",
+              "src": "/dress-images/1794433504451-teuxh2.jpg"
+            },
+            {
+              "id": "1794433504505-oj9i7b.jpg",
+              "src": "/dress-images/1794433504505-oj9i7b.jpg"
+            },
+            {
+              "id": "1794433504590-htrnai.jpg",
+              "src": "/dress-images/1794433504590-htrnai.jpg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 17,
+      "parentName": "Oray Naanayam  Sneha Royal Blue Anarkali With Shall",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "17",
+          "price": "2000",
+          "images": [
+            {
+              "id": "17.jpeg",
+              "src": "/images/17.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "17.1",
+          "price": "2000",
+          "images": [
+            {
+              "id": "17.1.jpeg",
+              "src": "/images/17.1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "17.2",
+          "price": "2000",
+          "images": [
+            {
+              "id": "17.2.jpeg",
+              "src": "/images/17.2.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "17.3",
+          "price": "2000",
+          "images": [
+            {
+              "id": "17.3.jpeg",
+              "src": "/images/17.3.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 15,
+      "parentName": "Golden Maroon Trending Anarkali With Shall",
+      "category": "Everyday",
+      "variations": [
+        {
+          "key": "15",
+          "price": "2500",
+          "images": [
+            {
+              "id": "15.jpeg",
+              "src": "/images/15.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "15.1",
+          "price": "2500",
+          "images": [
+            {
+              "id": "15.1.jpeg",
+              "src": "/images/15.1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "15.2",
+          "price": "2500",
+          "images": [
+            {
+              "id": "15.2.jpeg",
+              "src": "/images/15.2.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 1,
+      "parentName": "Shalini Pink Chudi Top Pant Shall Trending Set",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "1",
+          "price": "3000",
+          "images": [
+            {
+              "id": "1.jpeg",
+              "src": "/images/1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "1.1",
+          "price": "3000",
+          "images": [
+            {
+              "id": "1.1.jpeg",
+              "src": "/images/1.1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "1.2",
+          "price": "3000",
+          "images": [
+            {
+              "id": "1.2.jpeg",
+              "src": "/images/1.2.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "1.3",
+          "price": "3000",
+          "images": [
+            {
+              "id": "1.3.jpeg",
+              "src": "/images/1.3.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 16,
+      "parentName": "Black Double Layer,Embroideing,Lace Work Long Anarkali With Shall",
+      "category": "Statement",
+      "variations": [
+        {
+          "key": "16",
+          "price": "3000",
+          "images": [
+            {
+              "id": "16.jpeg",
+              "src": "/images/16.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "16.1",
+          "price": "3000",
+          "images": [
+            {
+              "id": "16.1.jpeg",
+              "src": "/images/16.1.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "16.2",
+          "price": "3000",
+          "images": [
+            {
+              "id": "16.2.jpeg",
+              "src": "/images/16.2.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "16.3",
+          "price": "3000",
+          "images": [
+            {
+              "id": "16.3.jpeg",
+              "src": "/images/16.3.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 21,
+      "parentName": "Green Crush,George Material,Long Anarkali and Shall",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "21",
+          "price": "2000",
+          "images": [
+            {
+              "id": "1794434739973-o1m6zp.jpg",
+              "src": "/dress-images/1794434739973-o1m6zp.jpg"
+            },
+            {
+              "id": "1794434740066-0jxbal.jpg",
+              "src": "/dress-images/1794434740066-0jxbal.jpg"
+            },
+            {
+              "id": "1794434740150-7xj4hd.jpg",
+              "src": "/dress-images/1794434740150-7xj4hd.jpg"
+            },
+            {
+              "id": "1794434740242-v329y2.jpg",
+              "src": "/dress-images/1794434740242-v329y2.jpg"
+            },
+            {
+              "id": "1794434740307-i367be.jpg",
+              "src": "/dress-images/1794434740307-i367be.jpg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 22,
+      "parentName": "Red Movie, Sudidhar Top Court, Shall three Piece",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "22",
+          "price": "2000",
+          "images": [
+            {
+              "id": "1794434815720-11j24m.jpg",
+              "src": "/dress-images/1794434815720-11j24m.jpg"
+            },
+            {
+              "id": "1794434815753-c4d007.jpg",
+              "src": "/dress-images/1794434815753-c4d007.jpg"
+            },
+            {
+              "id": "1794434815833-4ec2pc.jpg",
+              "src": "/dress-images/1794434815833-4ec2pc.jpg"
+            },
+            {
+              "id": "1794434815914-gani68.jpg",
+              "src": "/dress-images/1794434815914-gani68.jpg"
+            },
+            {
+              "id": "1794434816009-gb1ebd.jpg",
+              "src": "/dress-images/1794434816009-gb1ebd.jpg"
+            },
+            {
+              "id": "1794434816085-438jn6.jpg",
+              "src": "/dress-images/1794434816085-438jn6.jpg"
+            },
+            {
+              "id": "1794434816165-36ho8y.jpg",
+              "src": "/dress-images/1794434816165-36ho8y.jpg"
+            },
+            {
+              "id": "1794434816207-35bxol.jpg",
+              "src": "/dress-images/1794434816207-35bxol.jpg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 8,
+      "parentName": "Thirumanam Malargal Jo Sudi Top Pant Shall Three Piece",
+      "category": "Statement",
+      "variations": [
+        {
+          "key": "8",
+          "price": "2500",
+          "images": [
+            {
+              "id": "8.jpeg",
+              "src": "/images/8.jpeg"
+            }
+          ]
+        },
+        {
+          "key": "8.1",
+          "price": "2500",
+          "images": [
+            {
+              "id": "8.1.jpeg",
+              "src": "/images/8.1.jpeg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    },
+    {
+      "id": 23,
+      "parentName": "Nenjukkulla Ne Swathi Top and Shall",
+      "category": "Festive",
+      "variations": [
+        {
+          "key": "23",
+          "price": "2000",
+          "images": [
+            {
+              "id": "1794435011699-4w5wxi.jpg",
+              "src": "/dress-images/1794435011699-4w5wxi.jpg"
+            },
+            {
+              "id": "1794435011762-wpqmpg.jpg",
+              "src": "/dress-images/1794435011762-wpqmpg.jpg"
+            },
+            {
+              "id": "1794435011828-1gpq7d.jpg",
+              "src": "/dress-images/1794435011828-1gpq7d.jpg"
+            },
+            {
+              "id": "1794435011965-fvm9v5.jpg",
+              "src": "/dress-images/1794435011965-fvm9v5.jpg"
+            },
+            {
+              "id": "1794435012048-zrytrg.jpg",
+              "src": "/dress-images/1794435012048-zrytrg.jpg"
+            }
+          ]
+        }
+      ],
+      "removed": false
+    }
+  ]
+}

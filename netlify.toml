@@ -2,6 +2,27 @@
   command = "npm run build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+
+# Product catalog and uploaded dress images
+[[redirects]]
+  from = "/api/dresses/*"
+  to = "/.netlify/functions/dresses"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/dresses"
+  to = "/.netlify/functions/dresses"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/dress-images/*"
+  to = "/.netlify/functions/dress-image/:splat"
+  status = 200
+
 # SPA fallback — product/cart/wishlist URLs work on refresh
 [[redirects]]
   from = "/*"

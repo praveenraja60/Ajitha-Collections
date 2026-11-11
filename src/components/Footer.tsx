@@ -32,7 +32,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="site-footer relative overflow-hidden border-t border-burgundy/20 text-champagne"
+      className="site-footer relative overflow-hidden border-t border-beige text-ink"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}
@@ -43,7 +43,7 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(700px 320px at 12% 0%, rgba(196,98,45,0.22), transparent 55%), linear-gradient(165deg, #3c2a22 0%, #2a1e18 55%, #1a1310 100%)',
+            'radial-gradient(700px 320px at 12% 0%, rgba(168,90,102,0.08), transparent 55%), linear-gradient(180deg, #fffdfb 0%, #f6efe9 100%)',
         }}
       />
       <div
@@ -53,14 +53,14 @@ export default function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8">
         <div className="flex flex-col items-center text-center">
-          <p className="text-[10px] tracking-[0.32em] text-gold uppercase">The atelier</p>
-          <p className="mt-2 font-script text-[3rem] leading-none text-gold sm:text-[3.6rem]">
+          <p className="text-[10px] tracking-[0.32em] text-burgundy uppercase">The atelier</p>
+          <p className="mt-2 font-script text-[3rem] leading-none text-burgundy sm:text-[3.6rem]">
             Ajitha
           </p>
-          <p className="mt-1 text-[10px] font-semibold tracking-[0.36em] text-champagne/80 uppercase">
+          <p className="mt-1 text-[10px] font-semibold tracking-[0.36em] text-ink/70 uppercase">
             Collection
           </p>
-          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-champagne/70">
+          <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-muted">
             Your style. Your design. Our craft.
           </p>
         </div>
@@ -75,29 +75,29 @@ export default function Footer() {
             <WhatsAppGlyph className="h-4 w-4" />
             Order on WhatsApp
           </a>
-          <div className="inline-flex min-h-11 items-center justify-center rounded-full border border-gold/40 px-4 text-[10px] tracking-[0.14em] text-gold uppercase">
+          <div className="inline-flex min-h-11 items-center justify-center rounded-full border border-burgundy/30 px-4 text-[10px] tracking-[0.14em] text-burgundy uppercase">
             Made to order · 15 days
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col items-center gap-3 border-t border-champagne/15 pt-4 sm:flex-row sm:justify-between">
+        <div className="mt-6 flex flex-col items-center gap-3 border-t border-beige pt-4 sm:flex-row sm:justify-between">
           <nav
             aria-label="Footer"
-            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12px] tracking-[0.06em] text-champagne/70"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[12px] tracking-[0.06em] text-muted"
           >
-            <Link to="/products" className="transition hover:text-gold">
+            <Link to="/products" className="transition hover:text-burgundy">
               Shop
             </Link>
-            <button type="button" className="transition hover:text-gold" onClick={() => goSection('about')}>
+            <button type="button" className="transition hover:text-burgundy" onClick={() => goSection('about')}>
               About
             </button>
-            <button type="button" className="transition hover:text-gold" onClick={() => goSection('contact')}>
+            <button type="button" className="transition hover:text-burgundy" onClick={() => goSection('contact')}>
               Contact
             </button>
-            <Link to="/wishlist" className="transition hover:text-gold">
+            <Link to="/wishlist" className="transition hover:text-burgundy">
               Wishlist
             </Link>
-            <Link to="/cart" className="transition hover:text-gold">
+            <Link to="/cart" className="transition hover:text-burgundy">
               Cart
             </Link>
           </nav>
@@ -109,7 +109,7 @@ export default function Footer() {
               rel="noreferrer"
               aria-label={INSTAGRAM_HANDLE}
               title={INSTAGRAM_HANDLE}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/35 text-gold transition hover:bg-gold/10"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-burgundy/30 text-burgundy transition hover:bg-blush"
             >
               <InstagramGlyph className="h-4 w-4" />
             </a>
@@ -119,14 +119,14 @@ export default function Footer() {
               rel="noreferrer"
               aria-label={`WhatsApp ${WHATSAPP_DISPLAY}`}
               title={WHATSAPP_DISPLAY}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/35 text-gold transition hover:bg-gold/10"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-burgundy/30 text-burgundy transition hover:bg-blush"
             >
               <WhatsAppGlyph className="h-4 w-4" />
             </a>
           </div>
         </div>
 
-        <p className="mt-4 text-center text-[10px] tracking-[0.05em] text-champagne/45">
+        <p className="mt-4 text-center text-[10px] tracking-[0.05em] text-muted">
           © {year} Ajitha Collection
         </p>
       </div>

@@ -12,24 +12,24 @@
   --font-sans: "Outfit", system-ui, sans-serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-script: "Great Vibes", cursive;
-  /* Warm mocha surfaces */
-  --color-canvas: #f6efe6;
-  --color-ivory: #fbf6ef;
-  --color-cream: #efe4d4;
-  --color-beige: #e0d0bc;
-  --color-blush: #d4c0a8;
-  --color-champagne: #f3e6d0;
-  /* Mocha, champagne gold, burnt amber */
-  --color-burgundy: #c4622d;
-  --color-wine: #2a1e18;
-  --color-rose: #d4783a;
-  --color-amber: #c4622d;
-  --color-plum: #1a1310;
-  --color-brown: #5c4033;
-  --color-gold: #e4cfa6;
-  --color-ink: #2a1e18;
-  --color-mauve: #8a7364;
-  --color-muted: #8a7364;
+  /* Soft ivory surfaces */
+  --color-canvas: #fbf7f4;
+  --color-ivory: #fffdfb;
+  --color-cream: #f6efe9;
+  --color-beige: #eadfd6;
+  --color-blush: #f3e4e1;
+  --color-champagne: #f8f1ea;
+  /* Dusty rose on a light boutique palette */
+  --color-burgundy: #a85a66;
+  --color-wine: #6f3d46;
+  --color-rose: #c48992;
+  --color-amber: #a85a66;
+  --color-plum: #4d3036;
+  --color-brown: #8d6b62;
+  --color-gold: #b08968;
+  --color-ink: #3c3330;
+  --color-mauve: #8a756e;
+  --color-muted: #8a756e;
 }
 
 html,
@@ -49,11 +49,11 @@ body {
   letter-spacing: 0.03em;
   line-height: 1.7;
   color: var(--color-ink);
-  background-color: #f6efe6;
+  background-color: #fbf7f4;
   background-image:
-    radial-gradient(900px 480px at 0% 0%, rgba(196, 98, 45, 0.07), transparent 55%),
-    radial-gradient(800px 420px at 100% 8%, rgba(228, 207, 166, 0.45), transparent 50%),
-    linear-gradient(180deg, #fbf6ef 0%, #f6efe6 45%, #efe4d4 100%);
+    radial-gradient(900px 480px at 0% 0%, rgba(168, 90, 102, 0.08), transparent 55%),
+    radial-gradient(800px 420px at 100% 8%, rgba(243, 228, 225, 0.75), transparent 50%),
+    linear-gradient(180deg, #fffdfb 0%, #fbf7f4 48%, #f6efe9 100%);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   text-rendering: optimizeLegibility;
@@ -212,15 +212,15 @@ textarea::placeholder {
   min-height: 48px;
   padding: 12px 28px;
   border-radius: 999px;
-  border: 1px solid #c4622d;
-  background: #c4622d;
+  border: 1px solid #a85a66;
+  background: #a85a66;
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  box-shadow: 0 8px 22px rgba(196, 98, 45, 0.28);
+  box-shadow: 0 8px 22px rgba(168, 90, 102, 0.22);
   transition:
     background 0.25s ease,
     color 0.25s ease,
@@ -230,11 +230,11 @@ textarea::placeholder {
 }
 
 .btn:hover {
-  background: #d4783a;
-  border-color: #d4783a;
+  background: #c48992;
+  border-color: #c48992;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(196, 98, 45, 0.35);
+  box-shadow: 0 12px 28px rgba(168, 90, 102, 0.28);
 }
 
 .btn:active {
@@ -243,15 +243,15 @@ textarea::placeholder {
 }
 
 .btn-outline {
-  background: #2a1e18;
-  border-color: #2a1e18;
-  color: #ffffff;
+  background: #fffdfb;
+  border-color: #a85a66;
+  color: #a85a66;
   box-shadow: none;
 }
 
 .btn-outline:hover {
-  background: #c4622d;
-  border-color: #c4622d;
+  background: #a85a66;
+  border-color: #a85a66;
   color: #ffffff;
 }
 
@@ -362,32 +362,30 @@ textarea::placeholder {
 }
 
 .site-header {
-  background:
-    radial-gradient(700px 220px at 12% 0%, rgba(228, 207, 166, 0.12), transparent 55%),
-    linear-gradient(165deg, #3c2a22 0%, #2a1e18 55%, #1a1310 100%);
-  backdrop-filter: blur(16px) saturate(1.1);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1);
-  border-color: rgba(196, 98, 45, 0.35);
+  background: rgba(255, 253, 251, 0.92);
+  backdrop-filter: blur(16px) saturate(1.05);
+  -webkit-backdrop-filter: blur(16px) saturate(1.05);
+  border-color: rgba(234, 223, 214, 0.95);
 }
 
 .site-header .icon-btn {
-  color: #f3e6d0;
+  color: #a85a66;
 }
 
 .site-header .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgba(168, 90, 102, 0.1);
+  color: #6f3d46;
 }
 
 .site-header .like-btn--nav {
-  border-color: rgba(240, 242, 245, 0.35);
-  color: #f3e6d0;
+  border-color: rgba(168, 90, 102, 0.28);
+  color: #a85a66;
 }
 
 .site-header .like-btn--nav:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(168, 90, 102, 0.1);
+  color: #6f3d46;
+  border-color: rgba(168, 90, 102, 0.45);
 }
 
 .site-header .like-btn--nav.is-loved {

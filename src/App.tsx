@@ -36,9 +36,9 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location.pathname]);
 
-  if (!live && !commanded) {
-    return <Maintenance />;
-  }
+  // if (!live && !commanded) {
+  //   return <Maintenance />;
+  // }
 
   return (
     <MotionConfig reducedMotion="user">

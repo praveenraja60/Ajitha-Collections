@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Heart } from 'lucide-react'
-import { getProduct, relatedProducts } from '../lib/catalog'
+import { useDresses } from '../lib/dresses'
 import ProductGallery from '../components/ProductGallery'
 import ProductRail from '../components/ProductRail'
 import Seo from '../components/Seo'
@@ -22,6 +22,7 @@ const SIZE_GUIDE = [
 export default function ProductDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { getProduct, relatedProducts } = useDresses()
   const product = getProduct(Number(id))
   const [size, setSize] = useState('M')
   const [guide, setGuide] = useState(false)
@@ -66,7 +67,7 @@ export default function ProductDetailsPage() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-[11px] tracking-[0.24em] text-burgundy uppercase">
-                {product.category} · {product.id}
+                {product.id}
               </p>
               <h1 className="mt-1 text-[1.9rem] leading-tight text-ink sm:text-[2.5rem]">
                 {product.name}

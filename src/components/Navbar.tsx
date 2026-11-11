@@ -7,7 +7,6 @@ import { scrollToId } from '../lib/scroll'
 import { useCart } from '../lib/cart'
 import { readWishlist, WISHLIST_EVENT } from '../lib/wishlist'
 import InstagramGlyph from './InstagramGlyph'
-import { CATEGORIES } from '../data/productInfo'
 import { easeLuxury } from '../lib/motion'
 
 function WhatsAppGlyph({ className }: { className?: string }) {
@@ -24,7 +23,6 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const [cats, setCats] = useState(false)
   const [query, setQuery] = useState('')
   const [scrolled, setScrolled] = useState(false)
   const [wishCount, setWishCount] = useState(0)
@@ -33,7 +31,7 @@ export default function Navbar() {
   const { count } = useCart()
   const onHome = location.pathname === '/'
   const linkClass =
-    'text-[13px] font-medium tracking-[0.04em] text-champagne/80 transition-colors hover:text-white'
+    'text-[13px] font-medium tracking-[0.04em] text-ink/75 transition-colors hover:text-burgundy'
   const wishLoved = wishCount > 0
 
   useEffect(() => {
@@ -102,13 +100,13 @@ export default function Navbar() {
           }}
         >
           <span
-            className={`font-script leading-none text-gold transition-[font-size] duration-300 ${
+            className={`font-script leading-none text-burgundy transition-[font-size] duration-300 ${
               scrolled ? 'text-[28px]' : 'text-[32px]'
             }`}
           >
             Ajitha
           </span>
-          <span className="hidden font-display text-[13px] font-semibold tracking-[0.22em] text-champagne/85 uppercase sm:inline">
+          <span className="hidden font-display text-[13px] font-semibold tracking-[0.22em] text-burgundy/80 uppercase sm:inline">
             Collection
           </span>
         </Link>
@@ -119,34 +117,6 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="/products" className={linkClass}>Shop</Link>
-          </li>
-          <li className="relative">
-            <button type="button" className={linkClass} onClick={() => setCats((v) => !v)}>
-              Categories
-            </button>
-            <AnimatePresence>
-              {cats && (
-                <motion.ul
-                  initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                  transition={{ duration: 0.22, ease: easeLuxury }}
-                  className="absolute left-0 top-8 z-20 min-w-[160px] rounded-[10px] border border-burgundy/40 bg-wine p-2 shadow-lg"
-                >
-                  {CATEGORIES.map((c) => (
-                    <li key={c}>
-                      <Link
-                        to={`/products?category=${encodeURIComponent(c)}`}
-                        className="block px-3 py-2 text-sm text-champagne/90 hover:bg-burgundy/40 hover:text-white"
-                        onClick={() => setCats(false)}
-                      >
-                        {c}
-                      </Link>
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </AnimatePresence>
           </li>
           <li>
             <button type="button" className={linkClass} onClick={() => goSection('about')}>About</button>
@@ -192,13 +162,13 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-burgundy/30 bg-wine/95 px-4 py-2.5"
+            className="overflow-hidden border-t border-beige bg-ivory px-4 py-2.5"
           >
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search dresses…"
-              className="w-full rounded-[10px] border border-burgundy/40 bg-plum/80 px-4 py-2.5 text-sm text-champagne outline-none placeholder:text-champagne/50"
+              className="w-full rounded-[10px] border border-beige bg-cream/70 px-4 py-2.5 text-sm text-ink outline-none"
             />
           </motion.form>
         )}
@@ -211,24 +181,17 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: easeLuxury }}
-            className="flex flex-col overflow-hidden border-t border-burgundy/30 bg-wine/95 px-5 py-3 text-champagne min-[1100px]:hidden"
+            className="flex flex-col overflow-hidden border-t border-beige bg-ivory px-5 py-3 text-ink min-[1100px]:hidden"
           >
-            <li><Link to="/" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>Home</Link></li>
-            <li><Link to="/products" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>Shop</Link></li>
-            {CATEGORIES.map((c) => (
-              <li key={c}>
-                <Link to={`/products?category=${encodeURIComponent(c)}`} className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>
-                  {c}
-                </Link>
-              </li>
-            ))}
+            <li><Link to="/" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>Home</Link></li>
+            <li><Link to="/products" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>Shop</Link></li>
             <li>
-              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="block min-h-11 py-3 text-sm text-champagne/90" onClick={() => setOpen(false)}>
+              <a href={whatsappLink()} target="_blank" rel="noreferrer" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>
                 WhatsApp
               </a>
             </li>
-            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-champagne/90" onClick={() => goSection('about')}>About</button></li>
-            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-champagne/90" onClick={() => goSection('contact')}>Contact</button></li>
+            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-ink" onClick={() => goSection('about')}>About</button></li>
+            <li><button type="button" className="block min-h-11 w-full py-3 text-left text-sm text-ink" onClick={() => goSection('contact')}>Contact</button></li>
           </motion.ul>
         )}
       </AnimatePresence>
