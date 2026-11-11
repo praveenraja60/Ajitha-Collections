@@ -3,7 +3,8 @@ import { getStore } from '@netlify/blobs'
 const STORE = 'ajitha-dresses'
 const CATALOG = 'catalog'
 
-function store() {
+function store(context) {
+  if (context?.blobs?.getStore) return context.blobs.getStore(STORE)
   return getStore(STORE)
 }
 
@@ -14,9 +15,9 @@ function json(data, status = 200) {
   })
 }
 
-export default async (req) => {
+export default async (req, context) => {
   const url = new URL(req.url)
-  const blobs = store()
+  const blobs = store(context)
 
   if (url.pathname.endsWith('/image') && req.method === 'POST') {
     const body = await req.json()
@@ -43,4 +44,8 @@ export default async (req) => {
   }
 
   return json({ error: 'Method not allowed' }, 405)
+}
+
+export const config = {
+  path: ['/api/dresses', '/api/dresses/*'],
 }

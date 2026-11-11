@@ -69,8 +69,9 @@ export default function DressTable() {
       await saveDress(edit)
       setNotice(`${edit.parentName.trim()} saved. The shop is using this name, price, and photos.`)
       setOpenId(null)
-    } catch {
-      setNotice('Save failed. Check that the dev server is running and try a smaller image.')
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Save failed.'
+      setNotice(message || 'Save failed. Try a smaller image.')
     } finally {
       setBusy(false)
     }

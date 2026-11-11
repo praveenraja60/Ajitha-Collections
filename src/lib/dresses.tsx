@@ -43,7 +43,10 @@ async function putEdits(dresses: DressEdit[]) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ dresses }),
   })
-  if (!response.ok) throw new Error('Could not save dresses')
+  if (!response.ok) {
+    const detail = await response.text().catch(() => '')
+    throw new Error(detail.trim() || 'Could not save dresses')
+  }
   const body = (await response.json()) as { dresses?: DressEdit[] }
   return Array.isArray(body.dresses) ? body.dresses : dresses
 }
