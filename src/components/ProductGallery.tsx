@@ -70,7 +70,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
         onTouchStart={(e) => onTouchStart(e.changedTouches[0].clientX)}
         onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
       >
-        <div className="relative w-full">
+        <div className="relative aspect-[3/4] w-full">
           {images.map((img, idx) => (
             <motion.img
               key={img.src}
@@ -80,11 +80,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
               animate={{ opacity: idx === i ? 1 : 0 }}
               transition={{ duration: FADE_S, ease: 'easeOut' }}
               draggable={false}
-              className={
-                idx === i
-                  ? 'relative block h-auto w-full select-none object-contain'
-                  : 'pointer-events-none absolute inset-0 h-full w-full select-none object-contain'
-              }
+              className="absolute inset-0 h-full w-full select-none object-contain"
             />
           ))}
         </div>
