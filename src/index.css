@@ -12,24 +12,23 @@
   --font-sans: "Outfit", system-ui, sans-serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-script: "Great Vibes", cursive;
-  /* Soft ivory surfaces */
+  /* Light ivory surfaces, dark type */
   --color-canvas: #fbf7f4;
   --color-ivory: #fffdfb;
   --color-cream: #f6efe9;
   --color-beige: #eadfd6;
   --color-blush: #f3e4e1;
   --color-champagne: #f8f1ea;
-  /* Dusty rose on a light boutique palette */
-  --color-burgundy: #a85a66;
-  --color-wine: #6f3d46;
-  --color-rose: #c48992;
-  --color-amber: #a85a66;
-  --color-plum: #4d3036;
-  --color-brown: #8d6b62;
-  --color-gold: #b08968;
-  --color-ink: #3c3330;
-  --color-mauve: #8a756e;
-  --color-muted: #8a756e;
+  --color-burgundy: #8d4550;
+  --color-wine: #3c2428;
+  --color-rose: #a85a66;
+  --color-amber: #8d4550;
+  --color-plum: #2a221f;
+  --color-brown: #5c463f;
+  --color-gold: #8d6b52;
+  --color-ink: #2a221f;
+  --color-mauve: #5c4e48;
+  --color-muted: #5c4e48;
 }
 
 html,
@@ -73,7 +72,7 @@ body {
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  outline: 2px solid #c4622d;
+  outline: 2px solid #a85a66;
   outline-offset: 2px;
 }
 
@@ -147,13 +146,22 @@ input:focus-visible {
   font-family: var(--font-display);
 }
 
+.price {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: #3c2428;
+}
+
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #c4622d;
+  color: #a85a66;
 }
 
 .section-title {
@@ -197,7 +205,8 @@ img {
 
 input,
 textarea {
-  color: #2a1e18;
+  color: #2a221f;
+  background-color: #fffdfb;
 }
 
 input::placeholder,
@@ -244,8 +253,8 @@ textarea::placeholder {
 
 .btn-outline {
   background: #fffdfb;
-  border-color: #a85a66;
-  color: #a85a66;
+  border-color: #8d4550;
+  color: #2a221f;
   box-shadow: none;
 }
 
@@ -262,7 +271,7 @@ textarea::placeholder {
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  color: #c4622d;
+  color: #a85a66;
   transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
@@ -321,7 +330,7 @@ textarea::placeholder {
 }
 
 .like-btn.is-loved {
-  background: linear-gradient(145deg, #d4783a, #c4622d);
+  background: linear-gradient(145deg, #c48992, #a85a66);
   color: #fff;
   border-color: rgba(244, 245, 248, 0.4);
 }
@@ -331,7 +340,7 @@ textarea::placeholder {
   height: 44px;
   border: 1px solid rgba(196, 98, 45, 0.28);
   background: transparent;
-  color: #c4622d;
+  color: #a85a66;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -344,7 +353,7 @@ textarea::placeholder {
 }
 
 .like-btn--nav.is-loved {
-  background: linear-gradient(145deg, #d4783a, #c4622d);
+  background: linear-gradient(145deg, #c48992, #a85a66);
   color: #fff;
   border-color: transparent;
   box-shadow: 0 6px 14px rgba(196, 98, 45, 0.28);
@@ -355,7 +364,7 @@ textarea::placeholder {
 }
 
 .site-glass {
-  background: rgba(244, 245, 248, 0.88);
+  background: rgba(255, 253, 251, 0.94);
   backdrop-filter: blur(16px) saturate(1.1);
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
   border-color: rgba(224, 208, 188, 0.85);
@@ -389,7 +398,7 @@ textarea::placeholder {
 }
 
 .site-header .like-btn--nav.is-loved {
-  background: linear-gradient(145deg, #d4783a, #c4622d);
+  background: linear-gradient(145deg, #c48992, #a85a66);
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.35);
 }

@@ -169,7 +169,7 @@ export default function DressTable() {
                     <input
                       value={draft.parentName}
                       onChange={(e) => update(product.id, (item) => ({ ...item, parentName: e.target.value }), product)}
-                      className="w-full rounded-lg border border-beige bg-white px-2 py-1.5 text-sm text-ink"
+                      className="w-full rounded-lg border border-beige bg-cream px-2 py-1.5 text-sm text-ink"
                       aria-label="Product type name"
                     />
                   ) : (
@@ -227,11 +227,11 @@ export default function DressTable() {
                                 product,
                               )
                             }
-                            className="mt-1 w-full rounded-lg border border-beige bg-white px-2 py-1.5 text-sm"
+                            className="mt-1 w-full rounded-lg border border-beige bg-cream px-2 py-1.5 text-sm"
                             aria-label={`Amount for ${variation.key}`}
                           />
                         ) : (
-                          <p className="text-sm text-ink">{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</p>
+                          <p className="price text-sm">{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</p>
                         )}
                       </div>
                       {!isParent && (
@@ -295,7 +295,7 @@ export default function DressTable() {
                           onChange={(e) =>
                             update(product.id, (item) => ({ ...item, parentName: e.target.value }), product)
                           }
-                          className="w-full rounded-md border border-beige bg-white px-2 py-1.5 text-base text-ink"
+                          className="w-full rounded-md border border-beige bg-cream px-2 py-1.5 text-base text-ink"
                           aria-label="Product type name"
                         />
                       ) : (
@@ -322,11 +322,11 @@ export default function DressTable() {
                               product,
                             )
                           }
-                          className="w-24 rounded-md border border-beige bg-white px-2 py-1"
+                          className="w-24 rounded-md border border-beige bg-cream px-2 py-1"
                           aria-label={`Amount for ${variation.key}`}
                         />
                       ) : (
-                        <span>{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</span>
+                        <span className="price">{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</span>
                       )}
                     </td>
                     <td className="px-3 py-2">
@@ -455,7 +455,7 @@ function AddProductModal({
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm text-ink"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm text-ink"
             required
           />
         </label>
@@ -465,7 +465,7 @@ function AddProductModal({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             inputMode="decimal"
-            className="mt-1 w-full rounded-lg border border-beige bg-white px-3 py-2 text-sm text-ink"
+            className="mt-1 w-full rounded-lg border border-beige bg-cream px-3 py-2 text-sm text-ink"
             required
           />
         </label>

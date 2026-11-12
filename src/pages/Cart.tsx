@@ -40,7 +40,7 @@ export default function CartPage() {
                   <div className="min-w-0 flex-1">
                     <p className="font-sans text-lg leading-snug break-words">{p.name}</p>
                     <p className="text-xs text-muted">Size {line.size}</p>
-                    <p className="mt-1 text-sm text-muted">{p.priceLabel}</p>
+                    <p className="price mt-1 text-sm">{p.priceLabel}</p>
                     <div className="mt-2 flex items-center gap-2">
                       <button type="button" className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-beige" onClick={() => setQty(line.productId, line.size, line.qty - 1)}>
                         −

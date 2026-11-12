@@ -6,14 +6,10 @@ import { useDresses } from '../lib/dresses'
 import ProductGallery from '../components/ProductGallery'
 import ProductRail from '../components/ProductRail'
 import Seo from '../components/Seo'
-import { productEnquiryMessage, stitchLookMessage, whatsappLink } from '../lib/whatsapp'
+import { productEnquiryMessage, whatsappLink } from '../lib/whatsapp'
 import { useCart } from '../lib/cart'
 import { readWishlist, toggleWishlist } from '../lib/wishlist'
 import { easeLuxury } from '../lib/motion'
-
-const FABRICS = ['As shown', 'Silk', 'Cotton', 'Georgette']
-const SLEEVES = ['As shown', 'Full', '3/4', 'Sleeveless']
-const LENGTHS = ['As shown', 'Knee', 'Ankle', 'Floor']
 
 const SIZE_GUIDE = [
   { size: 'S', bust: '32–34', waist: '26–28', hip: '36–38' },
@@ -29,9 +25,6 @@ export default function ProductDetailsPage() {
   const { getProduct, relatedProducts } = useDresses()
   const product = getProduct(Number(id))
   const [size, setSize] = useState('M')
-  const [fabric, setFabric] = useState(FABRICS[0])
-  const [sleeve, setSleeve] = useState(SLEEVES[0])
-  const [length, setLength] = useState(LENGTHS[0])
   const [guide, setGuide] = useState(false)
   const [loved, setLoved] = useState(false)
   const { add } = useCart()
@@ -58,14 +51,6 @@ export default function ProductDetailsPage() {
   const selectedSize = product.sizes?.includes(size) ? size : (product.sizes?.[0] ?? 'M')
   const productId = product.id
   const orderHref = whatsappLink(productEnquiryMessage(product.name, product.priceLabel, selectedSize))
-  const stitchHref = whatsappLink(
-    stitchLookMessage(product.name, product.priceLabel, {
-      size: selectedSize,
-      fabric,
-      sleeve,
-      length,
-    }),
-  )
 
   function addBag() {
     add(productId, selectedSize)
@@ -98,7 +83,7 @@ export default function ProductDetailsPage() {
             </button>
           </div>
 
-          <p className="mt-3 text-[1.35rem] font-medium tracking-[0.01em] text-burgundy">
+          <p className="price mt-3 text-[1.45rem] sm:text-[1.7rem]">
             {product.priceLabel}
           </p>
           <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted">{product.description}</p>
@@ -160,22 +145,6 @@ export default function ProductDetailsPage() {
             )}
           </AnimatePresence>
 
-          <div className="mt-4 rounded-[14px] border border-beige bg-ivory/80 p-3">
-            <p className="text-[11px] tracking-[0.18em] text-burgundy uppercase">Stitch my look</p>
-            <p className="mt-1 text-xs leading-relaxed text-muted">Choose the finish. WhatsApp opens with this dress and your choices.</p>
-            <ChoiceRow label="Fabric" options={FABRICS} value={fabric} onChange={setFabric} />
-            <ChoiceRow label="Sleeve" options={SLEEVES} value={sleeve} onChange={setSleeve} />
-            <ChoiceRow label="Length" options={LENGTHS} value={length} onChange={setLength} />
-            <a
-              href={stitchHref}
-              target="_blank"
-              rel="noreferrer"
-              className="btn mt-3 w-full"
-            >
-              Send this look on WhatsApp
-            </a>
-          </div>
-
           <dl className="mt-3 grid gap-1.5 rounded-[10px] bg-cream/70 p-3 text-sm sm:grid-cols-2">
             <div>
               <dt className="text-[10px] tracking-wide text-burgundy uppercase">Availability</dt>
@@ -218,38 +187,6 @@ export default function ProductDetailsPage() {
       {related.length > 0 && (
         <ProductRail eyebrow="You may also like" title="Related pieces" products={related} />
       )}
-    </div>
-  )
-}
-
-function ChoiceRow({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string
-  options: readonly string[]
-  value: string
-  onChange: (next: string) => void
-}) {
-  return (
-    <div className="mt-2.5">
-      <p className="text-[10px] tracking-[0.14em] text-muted uppercase">{label}</p>
-      <div className="mt-1 flex flex-wrap gap-1.5">
-        {options.map((option) => (
-          <button
-            key={option}
-            type="button"
-            onClick={() => onChange(option)}
-            className={`min-h-9 rounded-full border px-3 text-xs ${
-              value === option ? 'border-burgundy bg-burgundy text-white' : 'border-beige bg-white text-ink'
-            }`}
-          >
-            {option}
-          </button>
-        ))}
-      </div>
     </div>
   )
 }
