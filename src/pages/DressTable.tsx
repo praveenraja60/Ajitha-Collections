@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Trash2, X } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
+import { Check, ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
 import { CATEGORIES } from '../data/productInfo'
 import type { ShopProduct } from '../lib/catalog'
 import {
@@ -92,6 +92,30 @@ export default function DressTable() {
     setNotice(`${input.name.trim()} is on the shop.`)
   }
 
+  async function addPhotos(product: ShopProduct, variationKey: string, list: FileList | null) {
+    if (!list?.length) return
+    const images = []
+    for (const file of Array.from(list)) {
+      const problem = imageFileError(file)
+      if (problem) {
+        setNotice(problem)
+        continue
+      }
+      images.push(await uploadDressImage(file))
+    }
+    if (!images.length) return
+    update(
+      product.id,
+      (item) => ({
+        ...item,
+        variations: item.variations.map((row) =>
+          row.key === variationKey ? { ...row, images: [...row.images, ...images] } : row,
+        ),
+      }),
+      product,
+    )
+  }
+
   return (
     <div className="mx-auto max-w-5xl px-4 pb-8 pt-[4.4rem] sm:px-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -99,8 +123,15 @@ export default function DressTable() {
           <p className="eyebrow">Studio</p>
           <h1 className="mt-1 text-[2rem]">Dress table</h1>
         </div>
-        <button type="button" className="btn !min-h-10" onClick={() => setAdding(true)} disabled={busy}>
-          Add Product
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-burgundy text-white shadow-sm disabled:opacity-40"
+          aria-label="Add product"
+          title="Add product"
+          onClick={() => setAdding(true)}
+          disabled={busy}
+        >
+          <Plus size={20} />
         </button>
       </div>
       <p className="mt-2 max-w-3xl text-xs leading-relaxed text-muted">
@@ -123,8 +154,109 @@ export default function DressTable() {
         />
       )}
 
-      <div className="mt-3 overflow-x-auto rounded-xl border border-beige bg-ivory">
-        <table className="w-full min-w-[680px] border-collapse text-left text-sm">
+      <div className="mt-4 space-y-3 md:hidden">
+        {products.map((product, productIndex) => {
+          const draft = draftFor(product)
+          const editing = openId === product.id
+          return (
+            <article key={product.id} className="overflow-hidden rounded-2xl border border-beige bg-ivory">
+              <div className="flex items-start gap-3 border-b border-beige/80 px-3 py-3">
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream text-xs font-semibold text-burgundy">
+                  {productIndex + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  {editing ? (
+                    <input
+                      value={draft.parentName}
+                      onChange={(e) => update(product.id, (item) => ({ ...item, parentName: e.target.value }), product)}
+                      className="w-full rounded-lg border border-beige bg-white px-2 py-1.5 text-sm text-ink"
+                      aria-label="Product type name"
+                    />
+                  ) : (
+                    <p className="font-display text-lg leading-snug font-semibold break-words text-ink">{draft.parentName}</p>
+                  )}
+                  <p className="mt-0.5 text-[11px] text-muted">{draft.variations.map((row) => row.key).join(' · ')}</p>
+                </div>
+                <RowActions
+                  editing={editing}
+                  busy={busy}
+                  showEdit
+                  onEdit={() => setOpenId(product.id)}
+                  onSave={() => void persist(draft)}
+                  onAdd={() => {
+                    const childCount = draft.variations.filter((row) => row.key !== String(product.id)).length + 1
+                    update(product.id, (item) => ({
+                      ...item,
+                      variations: [...item.variations, blankVariation(`${product.id}.${childCount}`)],
+                    }), product)
+                  }}
+                  onDelete={() => {
+                    void removeDress(product.id).then(() =>
+                      setNotice(`Product type ${draft.parentName} and all of its variations were removed.`),
+                    )
+                  }}
+                  deleteLabel={`Delete product type ${draft.parentName}`}
+                />
+              </div>
+              <ul>
+                {draft.variations.map((variation) => {
+                  const isParent = variation.key === String(product.id)
+                  return (
+                    <li key={variation.key} className="flex items-center gap-3 border-t border-beige/70 px-3 py-2.5">
+                      <PhotoSlot
+                        images={variation.images}
+                        editing={editing}
+                        label={`Photos for ${variation.key}`}
+                        onPick={(list) => void addPhotos(product, variation.key, list)}
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] tracking-wide text-muted uppercase">{variation.key}</p>
+                        {editing ? (
+                          <input
+                            value={variation.price}
+                            inputMode="decimal"
+                            onChange={(e) =>
+                              update(
+                                product.id,
+                                (item) => ({
+                                  ...item,
+                                  variations: item.variations.map((row) =>
+                                    row.key === variation.key ? { ...row, price: e.target.value } : row,
+                                  ),
+                                }),
+                                product,
+                              )
+                            }
+                            className="mt-1 w-full rounded-lg border border-beige bg-white px-2 py-1.5 text-sm"
+                            aria-label={`Amount for ${variation.key}`}
+                          />
+                        ) : (
+                          <p className="text-sm text-ink">{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</p>
+                        )}
+                      </div>
+                      {!isParent && (
+                        <IconButton
+                          label={`Delete variation ${variation.key}`}
+                          onClick={() => {
+                            const next = { ...draft, variations: draft.variations.filter((row) => row.key !== variation.key) }
+                            setDrafts((current) => ({ ...current, [product.id]: next }))
+                            void persist(next)
+                          }}
+                        >
+                          <Trash2 size={15} />
+                        </IconButton>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </article>
+          )
+        })}
+      </div>
+
+      <div className="mt-4 hidden overflow-hidden rounded-2xl border border-beige bg-ivory shadow-sm md:block">
+        <table className="w-full border-collapse text-left text-sm">
           <thead className="bg-cream text-[10px] tracking-[0.12em] text-burgundy uppercase">
             <tr>
               <th className="px-2 py-2 font-semibold">Sno</th>
@@ -147,43 +279,13 @@ export default function DressTable() {
                         {productIndex + 1}
                       </td>
                     )}
-                    <td className="px-2 py-1.5">
-                      <Thumb images={variation.images} />
-                      {editing && (
-                        <input
-                          type="file"
-                          accept="image/jpeg,image/png,image/webp,image/gif"
-                          multiple
-                          aria-label={`Photos for ${variation.key}`}
-                          className="mt-1 block w-28 text-[11px]"
-                          onChange={(e) => {
-                            const files = e.target.files
-                            e.currentTarget.value = ''
-                            if (!files?.length) return
-                            void (async () => {
-                              const images = []
-                              for (const file of Array.from(files)) {
-                                const problem = imageFileError(file)
-                                if (problem) {
-                                  setNotice(problem)
-                                  continue
-                                }
-                                images.push(await uploadDressImage(file))
-                              }
-                              update(
-                                product.id,
-                                (item) => ({
-                                  ...item,
-                                  variations: item.variations.map((row) =>
-                                    row.key === variation.key ? { ...row, images: [...row.images, ...images] } : row,
-                                  ),
-                                }),
-                                product,
-                              )
-                            })()
-                          }}
-                        />
-                      )}
+                    <td className="px-3 py-2">
+                      <PhotoSlot
+                        images={variation.images}
+                        editing={editing}
+                        label={`Photos for ${variation.key}`}
+                        onPick={(list) => void addPhotos(product, variation.key, list)}
+                      />
                     </td>
                     {index === 0 && (
                     <td className="px-2 py-1.5 align-middle" rowSpan={draft.variations.length}>
@@ -197,7 +299,7 @@ export default function DressTable() {
                           aria-label="Product type name"
                         />
                       ) : (
-                        <p className="font-display text-xl font-semibold text-ink">{draft.parentName}</p>
+                        <p className="font-display text-lg leading-snug font-semibold break-words text-ink">{draft.parentName}</p>
                       )}
                       <p className="mt-0.5 text-xs text-muted">
                         {draft.variations.map((row) => row.key).join(' · ')}
@@ -227,54 +329,37 @@ export default function DressTable() {
                         <span>{variation.price ? `₹${Number(variation.price).toLocaleString('en-IN')}` : '—'}</span>
                       )}
                     </td>
-                    <td className="px-2 py-1.5">
-                      <div className="flex items-center gap-1">
-                        {index === 0 &&
-                          (editing ? (
-                            <button type="button" className="btn !min-h-8 !px-3 !text-[10px]" disabled={busy} onClick={() => void persist(draft)}>
-                              Save
-                            </button>
-                          ) : (
-                            <button type="button" className="btn btn-outline !min-h-8 !px-3 !text-[10px]" onClick={() => setOpenId(product.id)}>
-                              Edit
-                            </button>
-                          ))}
-                        {index === 0 && editing && (
-                          <button
-                            type="button"
-                            className="text-[10px] text-burgundy"
-                            onClick={() => {
-                              const childCount = draft.variations.filter((row) => row.key !== String(product.id)).length + 1
-                              update(product.id, (item) => ({
-                                ...item,
-                                variations: [...item.variations, blankVariation(`${product.id}.${childCount}`)],
-                              }), product)
-                            }}
-                          >
-                            Add
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          className="inline-flex h-8 w-8 items-center justify-center rounded-full text-burgundy hover:bg-blush"
-                          aria-label={isParent ? `Delete product type ${draft.parentName}` : `Delete variation ${variation.key}`}
-                          title={isParent ? 'Delete this product type and all of its variations' : 'Delete only this variation'}
-                          onClick={() => {
-                            if (isParent) {
-                              void removeDress(product.id).then(() => setNotice(`Product type ${draft.parentName} and all of its variations were removed.`))
-                              return
-                            }
-                            const next = {
-                              ...draft,
-                              variations: draft.variations.filter((row) => row.key !== variation.key),
-                            }
-                            setDrafts((current) => ({ ...current, [product.id]: next }))
-                            void persist(next)
-                          }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
+                    <td className="px-3 py-2">
+                      <RowActions
+                        editing={editing}
+                        busy={busy}
+                        showEdit={index === 0}
+                        showAdd={index === 0 && editing}
+                        onEdit={() => setOpenId(product.id)}
+                        onSave={() => void persist(draft)}
+                        onAdd={() => {
+                          const childCount = draft.variations.filter((row) => row.key !== String(product.id)).length + 1
+                          update(product.id, (item) => ({
+                            ...item,
+                            variations: [...item.variations, blankVariation(`${product.id}.${childCount}`)],
+                          }), product)
+                        }}
+                        onDelete={() => {
+                          if (isParent) {
+                            void removeDress(product.id).then(() =>
+                              setNotice(`Product type ${draft.parentName} and all of its variations were removed.`),
+                            )
+                            return
+                          }
+                          const next = {
+                            ...draft,
+                            variations: draft.variations.filter((row) => row.key !== variation.key),
+                          }
+                          setDrafts((current) => ({ ...current, [product.id]: next }))
+                          void persist(next)
+                        }}
+                        deleteLabel={isParent ? `Delete product type ${draft.parentName}` : `Delete variation ${variation.key}`}
+                      />
                     </td>
                   </tr>
                 )
@@ -426,6 +511,110 @@ function AddProductModal({
           </button>
         </div>
       </form>
+    </div>
+  )
+}
+
+function IconButton({
+  label,
+  onClick,
+  disabled,
+  children,
+}: {
+  label: string
+  onClick: () => void
+  disabled?: boolean
+  children: ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-beige text-burgundy transition hover:bg-cream disabled:opacity-40"
+    >
+      {children}
+    </button>
+  )
+}
+
+function RowActions({
+  editing,
+  busy,
+  showEdit,
+  showAdd,
+  onEdit,
+  onSave,
+  onAdd,
+  onDelete,
+  deleteLabel,
+}: {
+  editing: boolean
+  busy: boolean
+  showEdit?: boolean
+  showAdd?: boolean
+  onEdit: () => void
+  onSave: () => void
+  onAdd: () => void
+  onDelete: () => void
+  deleteLabel: string
+}) {
+  return (
+    <div className="flex items-center gap-1">
+      {showEdit &&
+        (editing ? (
+          <IconButton label="Save" onClick={onSave} disabled={busy}>
+            <Check size={16} />
+          </IconButton>
+        ) : (
+          <IconButton label="Edit" onClick={onEdit}>
+            <Pencil size={15} />
+          </IconButton>
+        ))}
+      {showEdit && editing && (showAdd ?? true) && (
+        <IconButton label="Add variation" onClick={onAdd}>
+          <Plus size={16} />
+        </IconButton>
+      )}
+      <IconButton label={deleteLabel} onClick={onDelete}>
+        <Trash2 size={15} />
+      </IconButton>
+    </div>
+  )
+}
+
+function PhotoSlot({
+  images,
+  editing,
+  label,
+  onPick,
+}: {
+  images: DressVariation['images']
+  editing: boolean
+  label: string
+  onPick: (files: FileList | null) => void
+}) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <Thumb images={images} />
+      {editing && (
+        <label className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-beige text-burgundy" title={label}>
+          <ImagePlus size={15} />
+          <span className="sr-only">{label}</span>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp"
+            multiple
+            className="sr-only"
+            onChange={(e) => {
+              onPick(e.target.files)
+              e.currentTarget.value = ''
+            }}
+          />
+        </label>
+      )}
     </div>
   )
 }

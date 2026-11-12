@@ -38,7 +38,7 @@ export default function CartPage() {
                 >
                   <img src={p.main.src} alt={p.name} className="h-24 w-20 object-cover object-top" />
                   <div className="min-w-0 flex-1">
-                    <p className="font-sans text-lg">{p.name}</p>
+                    <p className="font-sans text-lg leading-snug break-words">{p.name}</p>
                     <p className="text-xs text-muted">Size {line.size}</p>
                     <p className="mt-1 text-sm text-muted">{p.priceLabel}</p>
                     <div className="mt-2 flex items-center gap-2">

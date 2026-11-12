@@ -11,6 +11,14 @@ export function whatsappLink(message?: string) {
   return `${base}?text=${encodeURIComponent(text)}`
 }
 
+export function stitchLookMessage(
+  name: string,
+  priceLabel: string,
+  choices: { size: string; fabric: string; sleeve: string; length: string },
+) {
+  return `Hi Ajitha Collection, please stitch the ${name} (${priceLabel}). Size: ${choices.size}. Fabric: ${choices.fabric}. Sleeve: ${choices.sleeve}. Length: ${choices.length}.`
+}
+
 export function productEnquiryMessage(name: string, priceLabel: string, size?: string) {
   const sizeBit = size ? ` Size: ${size}.` : ''
   return `Hi Ajitha Collection, I'm interested in the ${name} (${priceLabel}).${sizeBit} Please share fabric and availability — stitching takes about 15 days.`

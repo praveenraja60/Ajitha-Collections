@@ -65,7 +65,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
   return (
     <div className="w-full min-w-0 overflow-x-clip">
       <div
-        className="relative overflow-hidden rounded-[12px] bg-gradient-to-b from-cream to-beige/60"
+        className="relative overflow-hidden rounded-[16px] bg-gradient-to-b from-cream to-beige/60 shadow-[0_16px_40px_rgba(60,51,48,0.06)]"
         onPointerEnter={hold}
         onTouchStart={(e) => onTouchStart(e.changedTouches[0].clientX)}
         onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}

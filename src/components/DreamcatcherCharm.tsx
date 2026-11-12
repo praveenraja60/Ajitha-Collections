@@ -204,7 +204,7 @@ export default function DreamcatcherCharm() {
   return (
     <aside
       ref={rootRef}
-      className="dreamcatcher-charm fixed top-0 left-0 z-40 select-none sm:left-2 lg:left-3"
+      className="dreamcatcher-charm fixed top-0 left-0 z-40 hidden select-none sm:left-2 sm:block lg:left-3"
       aria-label="Dreamcatcher — pull to swing"
     >
       <div ref={pivotRef} className="absolute top-0 left-1/2 h-1 w-1 -translate-x-1/2" />
