@@ -9,7 +9,10 @@ export default function CollectionsPage() {
   const { searchProducts, products } = useDresses()
   const q = params.get('q') ?? ''
 
-  const list = useMemo(() => (q ? searchProducts(q) : products), [q, products, searchProducts])
+  const list = useMemo(() => {
+    const source = q ? searchProducts(q) : products
+    return [...source].sort((a, b) => b.id - a.id)
+  }, [q, products, searchProducts])
 
   return (
     <div className="px-4 pb-6 pt-[4.25rem] sm:px-6">

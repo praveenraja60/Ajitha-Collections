@@ -25,7 +25,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative pt-[3.5rem] md:px-6 md:pt-28"
+      className="relative pt-[5.25rem] md:px-6 md:pt-28"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
     >

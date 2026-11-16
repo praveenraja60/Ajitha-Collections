@@ -1,26 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
-import { motion } from 'framer-motion'
 import type { ShopProduct } from '../lib/catalog'
 import { preloadMany } from '../lib/preload'
 import Lightbox from './Lightbox'
 
 const INTERVAL_MS = 4500
-const FADE_S = 0.45
 
 export default function ProductGallery({ product }: { product: ShopProduct }) {
   const images = product.images.filter((img) => img.src)
+  const imageKey = images.map((img) => img.src).join('|')
   const [i, setI] = useState(0)
   const [open, setOpen] = useState(false)
   const pauseUntil = useRef(0)
-  const touchX = useRef<number | null>(null)
+  const scroller = useRef<HTMLDivElement>(null)
+  const lockScroll = useRef(false)
   const current = images[i] ?? images[0]
 
   useEffect(() => {
     setI(0)
     setOpen(false)
     preloadMany(images.slice(0, 2).map((img) => img.src))
-  }, [product.id, images])
+    // Reset only when this dress or its photo list changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id, imageKey])
 
   useEffect(() => {
     const next = images[(i + 1) % images.length]
@@ -41,6 +43,19 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
     pauseUntil.current = Date.now() + 6000
   }
 
+  useEffect(() => {
+    const el = scroller.current
+    if (!el) return
+    const left = i * el.clientWidth
+    if (Math.abs(el.scrollLeft - left) <= 4) return
+    lockScroll.current = true
+    el.scrollTo({ left, behavior: 'smooth' })
+    const timer = window.setTimeout(() => {
+      lockScroll.current = false
+    }, 480)
+    return () => window.clearTimeout(timer)
+  }, [i, imageKey])
+
   function go(next: number) {
     if (!images.length) return
     const len = images.length
@@ -48,16 +63,16 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
     hold()
   }
 
-  function onTouchStart(x: number) {
-    touchX.current = x
-  }
-
-  function onTouchEnd(x: number) {
-    if (touchX.current == null) return
-    const dx = x - touchX.current
-    touchX.current = null
-    if (dx < -36) go(i + 1)
-    else if (dx > 36) go(i - 1)
+  function onStripScroll() {
+    if (lockScroll.current) return
+    const el = scroller.current
+    if (!el || el.clientWidth < 1) return
+    const index = Math.min(images.length - 1, Math.max(0, Math.round(el.scrollLeft / el.clientWidth)))
+    setI((currentIndex) => {
+      if (currentIndex === index) return currentIndex
+      pauseUntil.current = Date.now() + 6000
+      return index
+    })
   }
 
   if (!current) return null
@@ -67,20 +82,19 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
       <div
         className="relative overflow-hidden rounded-[16px] bg-gradient-to-b from-cream to-beige/60 shadow-[0_16px_40px_rgba(60,51,48,0.06)]"
         onPointerEnter={hold}
-        onTouchStart={(e) => onTouchStart(e.changedTouches[0].clientX)}
-        onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
       >
-        <div className="relative mx-auto aspect-[3/4] w-full max-lg:h-[50vh] max-lg:w-auto max-lg:max-w-full">
+        <div
+          ref={scroller}
+          onScroll={onStripScroll}
+          className="flex aspect-[3/4] w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scrollbar-hide max-lg:h-[50vh] max-lg:aspect-auto"
+        >
           {images.map((img, idx) => (
-            <motion.img
-              key={img.src}
+            <img
+              key={`${img.src}-${idx}`}
               src={img.src}
               alt={`${product.name} ${img.label}`}
-              initial={false}
-              animate={{ opacity: idx === i ? 1 : 0 }}
-              transition={{ duration: FADE_S, ease: 'easeOut' }}
               draggable={false}
-              className="absolute inset-0 h-full w-full select-none object-contain"
+              className="h-full w-full shrink-0 snap-center object-contain select-none"
             />
           ))}
         </div>
