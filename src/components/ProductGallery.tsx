@@ -94,7 +94,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
               src={img.src}
               alt={`${product.name} ${img.label}`}
               draggable={false}
-              className="h-full w-full shrink-0 snap-center object-contain select-none"
+              className="h-full min-w-full flex-[0_0_100%] snap-center object-contain select-none"
             />
           ))}
         </div>
@@ -141,11 +141,14 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
         <div className="mt-2 flex gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide">
           {images.map((img, idx) => (
             <button
-              key={img.src}
+              key={`${img.src}-thumb-${idx}`}
               type="button"
               onClick={() => go(idx)}
-              className={`relative h-[68px] w-[54px] shrink-0 overflow-hidden rounded-lg border-2 bg-cream sm:h-[78px] sm:w-[62px] ${
-                idx === i ? 'border-burgundy shadow-[0_0_0_1px_rgba(196,98,45,0.22)]' : 'border-beige'
+              ref={(node) => {
+                if (node && idx === i) node.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
+              }}
+              className={`relative h-14 w-11 shrink-0 overflow-hidden rounded-lg border-2 bg-cream sm:h-[72px] sm:w-14 ${
+                idx === i ? 'border-burgundy' : 'border-beige'
               }`}
               aria-label={`View ${img.label}`}
               aria-current={idx === i}
