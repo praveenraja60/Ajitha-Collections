@@ -26,7 +26,7 @@ export default function App() {
       <AmbientGlow />
       <div className="relative z-[1] flex min-h-svh flex-col">
         <Navbar />
-        <main className="max-w-[100vw] flex-1 overflow-x-clip pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0">
+        <main className="max-w-[100vw] flex-1 overflow-x-clip pb-[calc(8rem+env(safe-area-inset-bottom))] lg:pb-0">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, y: 10 }}

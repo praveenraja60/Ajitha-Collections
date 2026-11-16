@@ -75,7 +75,7 @@ export function useCart() {
 export function cartWhatsAppText(lines: CartLine[]) {
   const rows = lines.map((l) => {
     const p = getProduct(l.productId)
-    return `• ${p?.name ?? `Product ${l.productId}`} × ${l.qty} (size ${l.size}) — ${p?.priceLabel ?? ''}`
+    return `• ${p?.name ?? `Product ${l.productId}`} × ${l.qty} — Size ${l.size} — ${p?.priceLabel ?? ''}`
   })
   return `Hi Ajitha Collection, I would like to order:\n${rows.join('\n')}`
 }

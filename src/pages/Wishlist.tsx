@@ -23,7 +23,7 @@ export default function WishlistPage() {
           </Link>
         </p>
       ) : (
-        <div className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-3 lg:grid-cols-4 lg:gap-3.5">
+        <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
           {list.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

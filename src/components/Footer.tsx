@@ -32,7 +32,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="site-footer relative overflow-hidden border-t border-beige text-ink"
+      className="site-footer relative overflow-hidden border-t border-beige pb-[calc(4.75rem+env(safe-area-inset-bottom))] text-ink lg:pb-0"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px' }}

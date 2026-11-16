@@ -135,7 +135,7 @@ export default function DressTable() {
         </button>
       </div>
       <p className="mt-2 max-w-3xl text-xs leading-relaxed text-muted">
-        A product type is the parent. Product Type 1 includes 1, 1.1, 1.2, and 1.3. Saving the parent name updates every variation.
+        A save here updates the live shop for every customer. A product added only on this computer does not appear until it is saved on the live dress table.
         Deleting a variation removes only that row. Deleting the product type removes the parent and every variation under it.
       </p>
       {notice && <p className="mt-2 text-xs text-burgundy">{notice}</p>}

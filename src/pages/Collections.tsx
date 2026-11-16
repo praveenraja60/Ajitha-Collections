@@ -27,7 +27,7 @@ export default function CollectionsPage() {
 
         <div
           key={q}
-          className="mt-4 grid grid-cols-2 gap-2.5 md:grid-cols-3 lg:grid-cols-4 lg:gap-4"
+          className="mt-4 grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
         >
           {list.map((product) => (
             <div key={product.id}>

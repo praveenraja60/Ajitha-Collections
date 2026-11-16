@@ -14,6 +14,7 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
     <article className="group min-w-0 transition-transform duration-200 ease-out hover:-translate-y-1 active:scale-[0.99]">
       <div className="relative overflow-hidden rounded-[12px] bg-gradient-to-b from-cream to-beige/70 ring-1 ring-beige/80">
         <Link to={`/products/${product.id}`} className="block">
+          {product.main.src ? (
           <img
             src={product.main.src}
             alt={product.name}
@@ -25,6 +26,9 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
               second ? 'group-hover:opacity-0' : 'group-hover:scale-[1.04]'
             }`}
           />
+          ) : (
+            <div className="aspect-[3/4] w-full bg-cream" />
+          )}
           {second && (
             <img
               src={second}

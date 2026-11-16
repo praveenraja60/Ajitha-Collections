@@ -36,11 +36,13 @@ export default function CartPage() {
                   transition={{ duration: 0.18 }}
                   className="flex gap-3 rounded-[12px] border border-beige bg-ivory/80 p-3"
                 >
-                  <img src={p.main.src} alt={p.name} className="h-24 w-20 object-cover object-top" />
+                  <img src={p.main.src} alt={p.name} className="h-24 w-20 rounded-md bg-cream object-contain" />
                   <div className="min-w-0 flex-1">
                     <p className="font-sans text-lg leading-snug break-words">{p.name}</p>
-                    <p className="text-xs text-muted">Size {line.size}</p>
-                    <p className="price mt-1 text-sm">{p.priceLabel}</p>
+                    <p className="mt-1 text-sm text-ink">
+                      Size {line.size}
+                      <span className="price ml-2">{p.priceLabel}</span>
+                    </p>
                     <div className="mt-2 flex items-center gap-2">
                       <button type="button" className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-beige" onClick={() => setQty(line.productId, line.size, line.qty - 1)}>
                         −

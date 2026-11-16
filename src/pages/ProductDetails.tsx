@@ -59,7 +59,7 @@ export default function ProductDetailsPage() {
   return (
     <div className="pb-5">
       <Seo title={`${product.name} | Ajitha Collection`} description={product.description} />
-      <article className="mx-auto grid max-w-6xl gap-5 px-4 pt-[4.4rem] sm:px-6 md:grid-cols-2 md:items-start md:gap-8 lg:gap-12">
+      <article className="mx-auto grid max-w-6xl gap-4 px-4 pt-[4.6rem] pb-6 sm:px-6 md:grid-cols-2 md:items-start md:gap-8 lg:gap-12">
         <div className="md:sticky md:top-24 md:pl-16 lg:pl-20">
           <ProductGallery product={product} />
         </div>
@@ -164,7 +164,7 @@ export default function ProductDetailsPage() {
             )}
           </dl>
 
-          <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="mt-5 grid grid-cols-1 gap-2 pr-16 sm:grid-cols-2 sm:pr-0">
             <a href={orderHref} target="_blank" rel="noreferrer" className="btn sm:col-span-2">
               Order size {selectedSize}
             </a>

@@ -9,7 +9,7 @@ const INTERVAL_MS = 4500
 const FADE_S = 0.45
 
 export default function ProductGallery({ product }: { product: ShopProduct }) {
-  const images = product.images
+  const images = product.images.filter((img) => img.src)
   const [i, setI] = useState(0)
   const [open, setOpen] = useState(false)
   const pauseUntil = useRef(0)
@@ -70,7 +70,7 @@ export default function ProductGallery({ product }: { product: ShopProduct }) {
         onTouchStart={(e) => onTouchStart(e.changedTouches[0].clientX)}
         onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
       >
-        <div className="relative aspect-[3/4] w-full">
+        <div className="relative mx-auto aspect-[3/4] w-full max-lg:h-[50vh] max-lg:w-auto max-lg:max-w-full">
           {images.map((img, idx) => (
             <motion.img
               key={img.src}

@@ -152,7 +152,7 @@ input:focus-visible {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.01em;
   line-height: 1.2;
-  color: #3c2428;
+  color: #9a6232;
 }
 
 .eyebrow {
@@ -405,10 +405,17 @@ textarea::placeholder {
 
 .wa-fab {
   position: fixed !important;
-  right: max(1.25rem, env(safe-area-inset-right));
+  right: max(1rem, env(safe-area-inset-right));
   left: auto;
-  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  bottom: calc(4.75rem + env(safe-area-inset-bottom));
   z-index: 80;
+}
+
+@media (min-width: 1024px) {
+  .wa-fab {
+    right: max(1.25rem, env(safe-area-inset-right));
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
 }
 
 .wa-fab::before {
