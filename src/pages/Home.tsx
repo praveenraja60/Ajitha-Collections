@@ -1,7 +1,6 @@
 import Hero from "../components/Hero";
 import ProductRail from "../components/ProductRail";
 import InstagramGallery from "../components/InstagramGallery";
-import StudioStrip from "../components/StudioStrip";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Seo from "../components/Seo";
@@ -9,8 +8,9 @@ import { useDresses } from "../lib/dresses";
 
 export default function Home() {
   const { products } = useDresses();
-  const list = products
+  const list = [...products]
     .filter((p, i, arr) => arr.findIndex((x) => x.id === p.id) === i)
+    .sort((a, b) => b.id - a.id)
     .slice(0, 10);
   return (
     <>
@@ -20,13 +20,12 @@ export default function Home() {
       />
       <Hero />
       <ProductRail
-        eyebrow="New in"
-        title="This season’s edit"
+        eyebrow="The edit"
+        title="Newest dresses"
         products={list}
       />
-      <StudioStrip />
-      <InstagramGallery />
       <About />
+      <InstagramGallery />
       <Contact />
     </>
   );

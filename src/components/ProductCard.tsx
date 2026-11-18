@@ -11,8 +11,8 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
   const second = product.images[1]?.src
 
   return (
-    <article className="group min-w-0 transition-transform duration-200 ease-out hover:-translate-y-1 active:scale-[0.99]">
-      <div className="relative overflow-hidden rounded-[12px] bg-gradient-to-b from-cream to-beige/70 ring-1 ring-beige/80">
+    <article className="group min-w-0">
+      <div className="relative overflow-hidden rounded-md bg-cream ring-1 ring-beige">
         <Link to={`/products/${product.id}`} className="block">
           {product.main.src ? (
           <img

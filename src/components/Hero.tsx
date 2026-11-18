@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { HERO_SLIDES } from '../lib/heroAssets'
-const INTERVAL_MS = 3500
+const INTERVAL_MS = 3000
 const FADE_S = 0.35
 
 export default function Hero() {
@@ -48,7 +48,8 @@ export default function Hero() {
         </div>
 
         <div className="md:order-2">
-          <div className="relative overflow-hidden bg-cream md:rounded-[22px] md:shadow-[0_18px_50px_rgba(60,51,48,0.08)]">
+          <div className="crystal-frame relative overflow-hidden bg-cream md:rounded-[22px] md:shadow-[0_18px_50px_rgba(60,51,48,0.08)]">
+            <span key={i} className="crystal-frame__glint" aria-hidden="true" />
             <div className="relative w-full">
               {HERO_SLIDES.map((slide, idx) => {
                 const active = idx === i

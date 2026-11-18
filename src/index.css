@@ -13,22 +13,22 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-script: "Great Vibes", cursive;
   /* Light ivory surfaces, dark type */
-  --color-canvas: #fbf7f4;
-  --color-ivory: #fffdfb;
-  --color-cream: #f6efe9;
-  --color-beige: #eadfd6;
-  --color-blush: #f3e4e1;
-  --color-champagne: #f8f1ea;
-  --color-burgundy: #8d4550;
-  --color-wine: #3c2428;
-  --color-rose: #a85a66;
-  --color-amber: #8d4550;
-  --color-plum: #2a221f;
-  --color-brown: #5c463f;
-  --color-gold: #8d6b52;
-  --color-ink: #2a221f;
-  --color-mauve: #5c4e48;
-  --color-muted: #5c4e48;
+  --color-canvas: #f8f3eb;
+  --color-ivory: #ffffff;
+  --color-cream: #e9ded2;
+  --color-beige: #e7ddd3;
+  --color-blush: #e9ded2;
+  --color-champagne: #f8f3eb;
+  --color-burgundy: #722b40;
+  --color-wine: #54202f;
+  --color-rose: #722b40;
+  --color-amber: #722b40;
+  --color-plum: #292321;
+  --color-brown: #54202f;
+  --color-gold: #d5b77a;
+  --color-ink: #292321;
+  --color-mauve: #82756f;
+  --color-muted: #82756f;
 }
 
 html,
@@ -48,7 +48,7 @@ body {
   letter-spacing: 0.03em;
   line-height: 1.7;
   color: var(--color-ink);
-  background-color: #fbf7f4;
+  background-color: #f8f3eb;
   background-image:
     radial-gradient(900px 480px at 0% 0%, rgba(168, 90, 102, 0.08), transparent 55%),
     radial-gradient(800px 420px at 100% 8%, rgba(243, 228, 225, 0.75), transparent 50%),
@@ -147,12 +147,77 @@ input:focus-visible {
 }
 
 .price {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
   font-family: var(--font-sans);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.01em;
   line-height: 1.2;
-  color: #9a6232;
+  color: #54202f;
+}
+
+.price::after,
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.72) 50%, transparent 65%);
+  transform: translateX(-130%);
+}
+
+.price::after {
+  animation: crystal-pass 1.1s ease 0.15s 1;
+}
+
+.crystal-frame {
+  box-shadow: inset 0 0 0 1px rgba(213, 183, 122, 0.9);
+}
+
+.crystal-frame__glint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 28%;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #fff, #d5b77a, transparent);
+  animation: crystal-edge 1.35s ease 1;
+}
+
+@keyframes crystal-pass {
+  to { transform: translateX(130%); }
+}
+
+@keyframes crystal-edge {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(420%); }
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+.nav-link:hover {
+  color: #722b40;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: #d5b77a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 .eyebrow {
@@ -161,7 +226,7 @@ input:focus-visible {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #a85a66;
+  color: #722b40;
 }
 
 .section-title {
@@ -215,14 +280,16 @@ textarea::placeholder {
 }
 
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
   padding: 12px 28px;
   border-radius: 999px;
-  border: 1px solid #a85a66;
-  background: #a85a66;
+  border: 1px solid #722b40;
+  background: #722b40;
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 12px;
@@ -238,9 +305,14 @@ textarea::placeholder {
     box-shadow 0.25s ease;
 }
 
+.btn:hover::before,
+.btn:active::before {
+  animation: crystal-pass 0.7s ease 1;
+}
+
 .btn:hover {
-  background: #c48992;
-  border-color: #c48992;
+  background: #54202f;
+  border-color: #54202f;
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(168, 90, 102, 0.28);
@@ -252,9 +324,9 @@ textarea::placeholder {
 }
 
 .btn-outline {
-  background: #fffdfb;
-  border-color: #8d4550;
-  color: #2a221f;
+  background: #ffffff;
+  border-color: #722b40;
+  color: #722b40;
   box-shadow: none;
 }
 
@@ -499,7 +571,10 @@ textarea::placeholder {
   }
   .section-title::after,
   .wa-fab::before,
-  .ambient-glow__orb {
+  .ambient-glow__orb,
+  .price::after,
+  .btn::before,
+  .crystal-frame__glint {
     animation: none;
   }
   .section-title::after {

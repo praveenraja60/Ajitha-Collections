@@ -31,7 +31,7 @@ export default function Navbar() {
   const { count } = useCart()
   const onHome = location.pathname === '/'
   const linkClass =
-    'text-[13px] font-medium tracking-[0.04em] text-ink/75 transition-colors hover:text-burgundy'
+    'nav-link text-[13px] font-medium tracking-[0.08em] text-ink/80 uppercase'
   const wishLoved = wishCount > 0
 
   useEffect(() => {
