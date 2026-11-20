@@ -13,20 +13,20 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-script: "Great Vibes", cursive;
   /* Light ivory surfaces, dark type */
-  --color-canvas: #f8f3eb;
+  --color-canvas: #f8f4ed;
   --color-ivory: #ffffff;
-  --color-cream: #e9ded2;
-  --color-beige: #e7ddd3;
-  --color-blush: #e9ded2;
-  --color-champagne: #f8f3eb;
-  --color-burgundy: #722b40;
+  --color-cream: #e8dcd0;
+  --color-beige: #e8dcd0;
+  --color-blush: #e8dcd0;
+  --color-champagne: #f8f4ed;
+  --color-burgundy: #702d3b;
   --color-wine: #54202f;
-  --color-rose: #722b40;
-  --color-amber: #722b40;
-  --color-plum: #292321;
+  --color-rose: #702d3b;
+  --color-amber: #702d3b;
+  --color-plum: #282522;
   --color-brown: #54202f;
-  --color-gold: #d5b77a;
-  --color-ink: #292321;
+  --color-gold: #b89a68;
+  --color-ink: #282522;
   --color-mauve: #82756f;
   --color-muted: #82756f;
 }
@@ -297,8 +297,8 @@ textarea::placeholder {
   min-height: 48px;
   padding: 12px 28px;
   border-radius: 999px;
-  border: 1px solid #722b40;
-  background: #722b40;
+  border: 1px solid #702d3b;
+  background: #702d3b;
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 12px;
@@ -593,4 +593,9 @@ textarea::placeholder {
   .icon-btn:active {
     transform: none;
   }
+}
+
+.site-footer,
+.site-footer :where(p, a, span, li) {
+  color: #f8f4ed;
 }

@@ -84,6 +84,9 @@ export default function Navbar() {
           : 'border-burgundy/30'
       }`}
     >
+      <p className="bg-[#702D3B] px-4 py-1.5 text-center text-[11px] tracking-[0.16em] text-[#F8F4ED] uppercase">
+        Made to order · about 15 days
+      </p>
       <nav
         className={`mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 transition-[padding] duration-400 sm:px-6 ${
           scrolled ? 'py-2.5' : 'py-3.5'
@@ -116,7 +119,7 @@ export default function Navbar() {
             <Link to="/" className={linkClass}>Home</Link>
           </li>
           <li>
-            <Link to="/products" className={linkClass}>Shop</Link>
+            <Link to="/products" className={linkClass}>Collections</Link>
           </li>
           <li>
             <button type="button" className={linkClass} onClick={() => goSection('about')}>About</button>
@@ -184,7 +187,7 @@ export default function Navbar() {
             className="flex flex-col overflow-hidden border-t border-beige bg-ivory px-5 py-3 text-ink min-[1100px]:hidden"
           >
             <li><Link to="/" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>Home</Link></li>
-            <li><Link to="/products" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>Shop</Link></li>
+            <li><Link to="/products" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>Collections</Link></li>
             <li>
               <a href={whatsappLink()} target="_blank" rel="noreferrer" className="block min-h-11 py-3 text-sm text-ink" onClick={() => setOpen(false)}>
                 WhatsApp

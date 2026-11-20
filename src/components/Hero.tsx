@@ -25,11 +25,11 @@ export default function Hero() {
 
   return (
     <section
-      className="relative pt-[5.25rem] md:px-6 md:pt-28"
+      className="relative pt-[6.6rem] md:px-6 md:pt-32"
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
     >
-      <h1 className="sr-only md:hidden">Ajitha Collection. Your style. Your design.</h1>
+      <h1 className="sr-only md:hidden">Your style. Your design.</h1>
       <div className="mx-auto grid max-w-7xl items-center md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-12">
         <div className="hidden md:order-1 md:block md:pl-16 lg:pl-20">
           <p className="eyebrow">The atelier</p>
@@ -42,11 +42,13 @@ export default function Hero() {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             Boutique dresses, stitched to your measurements. Choose a look and order on WhatsApp — ready in 15 days.
           </p>
-          <Magnet className="mt-5 inline-flex">
-            <Link to="/products" className="btn">
-              Shop the edit
-            </Link>
-          </Magnet>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <Magnet className="inline-flex">
+              <Link to="/products" className="btn">
+                Explore collection
+              </Link>
+            </Magnet>
+          </div>
         </div>
 
         <div className="md:order-2">
@@ -113,6 +115,18 @@ export default function Hero() {
                 aria-label={`Slide ${idx + 1}`}
               />
             ))}
+          </div>
+        </div>
+        <div className="order-2 px-4 pt-2 pb-4 md:hidden">
+          <h2 className="font-display text-[1.7rem] leading-tight text-ink">
+            Your style.
+            <span className="mt-1 block font-script text-[2.1rem] font-normal text-burgundy">Your design.</span>
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted">
+            Boutique dresses, stitched to your measurements. Choose a look and order on WhatsApp — ready in 15 days.
+          </p>
+          <div className="mt-4 flex flex-col gap-2">
+            <Link to="/products" className="btn">Explore collection</Link>
           </div>
         </div>
       </div>

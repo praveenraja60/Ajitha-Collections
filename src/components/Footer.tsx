@@ -43,7 +43,7 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(700px 320px at 12% 0%, rgba(168,90,102,0.08), transparent 55%), linear-gradient(180deg, #fffdfb 0%, #f6efe9 100%)',
+            '#702D3B',
         }}
       />
       <div

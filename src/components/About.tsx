@@ -1,11 +1,51 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HERO_SUPPORT } from '../lib/heroAssets'
+import { whatsappLink } from '../lib/whatsapp'
 
 const steps = [
   { n: '01', title: 'Choose', text: 'Pick a dress from the edit, or send a photo of the look you want.' },
   { n: '02', title: 'Measure', text: 'Share bust, waist, and hip on WhatsApp. We cut to those numbers.' },
   { n: '03', title: 'Stitch', text: 'The piece is finished in about 15 days and ready to collect or ship.' },
 ]
+
+function StitchNote() {
+  const [note, setNote] = useState('')
+  const href = whatsappLink(
+    `Hi Ajitha Collection, I would like a custom stitch.${note.trim() ? ` ${note.trim()}` : ''} I will send a reference photo in this chat.`,
+  )
+  return (
+    <div id="stitch" className="mx-auto mt-6 max-w-7xl border border-beige bg-white px-5 py-6">
+      <p className="eyebrow">Custom stitching</p>
+      <h2 className="display-title max-w-xl">Your design. Our craftsmanship.</h2>
+      <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+        Describe the outfit. WhatsApp opens with your note. Send the reference photo in that chat.
+      </p>
+      <form
+        className="mt-4 max-w-xl"
+        onSubmit={(event) => {
+          event.preventDefault()
+          window.open(href, '_blank', 'noopener,noreferrer')
+        }}
+      >
+        <label className="block text-xs text-muted" htmlFor="stitch-note">
+          What should we stitch?
+          <textarea
+            id="stitch-note"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            rows={4}
+            className="mt-1 w-full border border-beige px-3 py-2 text-sm text-ink"
+            placeholder="Neckline, fabric, colour, and the dress you want it based on."
+          />
+        </label>
+        <button type="submit" className="btn mt-3">
+          Continue on WhatsApp
+        </button>
+      </form>
+    </div>
+  )
+}
 
 export default function About() {
   return (
@@ -39,6 +79,7 @@ export default function About() {
           </Link>
         </div>
       </div>
+      <StitchNote />
     </section>
   )
 }
