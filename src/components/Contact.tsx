@@ -26,7 +26,7 @@ export default function Contact() {
         </div>
         <div className="flex flex-col justify-center px-5 py-6 sm:px-8">
           <p className="eyebrow">Contact</p>
-          <h2 className="mt-1 text-[1.9rem] sm:text-[2.4rem]">Let’s create your outfit</h2>
+          <h2 className="display-title">Let’s create your outfit</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">
             Share a reference on WhatsApp or Instagram — we’ll help with fabric, fitting and custom stitching.
           </p>

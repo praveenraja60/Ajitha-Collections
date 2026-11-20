@@ -255,6 +255,15 @@ input:focus-visible {
   }
 }
 
+.display-title {
+  margin-top: 0.25rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  color: #292321;
+  font-size: clamp(1.7rem, 3.2vw, 2.75rem);
+}
+
 h1,
 h2,
 h3 {

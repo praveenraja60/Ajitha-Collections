@@ -13,7 +13,7 @@ export default function CartPage() {
     <div className="mx-auto max-w-3xl px-4 pb-6 pt-[4.25rem] sm:px-6">
       <Seo title="Cart | Ajitha Collection" description="Review your bag and order on WhatsApp." />
       <p className="eyebrow">Bag</p>
-      <h1 className="mt-1 text-[2.2rem]">Cart</h1>
+      <h1 className="display-title">Cart</h1>
       {count === 0 ? (
         <p className="mt-8 text-sm text-muted">
           Your bag is empty.{' '}

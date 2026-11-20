@@ -14,7 +14,7 @@ export default function WishlistPage() {
     <div className="mx-auto max-w-7xl px-4 pb-6 pt-[4.25rem] sm:px-6">
       <Seo title="Wishlist | Ajitha Collection" />
       <p className="eyebrow">Saved</p>
-      <h1 className="mt-1.5 text-[2rem]">Wishlist</h1>
+      <h1 className="display-title">Wishlist</h1>
       {list.length === 0 ? (
         <p className="mt-6 text-sm text-muted">
           Nothing saved yet.{' '}

@@ -23,7 +23,7 @@ export default function CollectionsPage() {
       <div className="mx-auto max-w-7xl">
         <div>
           <p className="eyebrow">Shop</p>
-          <h1 className="mt-1 text-[2.2rem] sm:text-[2.75rem]">All Products</h1>
+          <h1 className="display-title">All Products</h1>
         </div>
 
         {q && <p className="mt-3 text-sm text-muted">Results for “{q}”</p>}

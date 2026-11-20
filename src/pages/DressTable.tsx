@@ -121,7 +121,7 @@ export default function DressTable() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow">Studio</p>
-          <h1 className="mt-1 text-[2rem]">Dress table</h1>
+          <h1 className="display-title">Dress table</h1>
         </div>
         <button
           type="button"

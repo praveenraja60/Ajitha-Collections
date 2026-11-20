@@ -20,7 +20,7 @@ export default function About() {
         </div>
         <div className="px-5 pb-6 md:py-8 md:pr-8 md:pl-2">
           <p className="eyebrow">The making</p>
-          <h2 className="mt-1 max-w-md text-[1.9rem] leading-tight text-ink sm:text-[2.4rem]">
+          <h2 className="display-title max-w-md">
             Not stitched for a rack. Stitched for you.
           </h2>
           <ol className="mt-5 space-y-3">

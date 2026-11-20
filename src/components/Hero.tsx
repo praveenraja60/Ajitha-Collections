@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { HERO_SLIDES } from '../lib/heroAssets'
 const INTERVAL_MS = 3000
@@ -34,17 +34,19 @@ export default function Hero() {
         <div className="hidden md:order-1 md:block md:pl-16 lg:pl-20">
           <p className="eyebrow">The atelier</p>
           <h1 className="mt-2 font-display text-[2.6rem] leading-[0.92] font-semibold text-ink sm:text-6xl md:text-[4.2rem]">
-            Your style.
+            <SplitLine text="Your style." reduce={!!reduce} />
             <span className="mt-1 block font-script text-[2.4rem] font-normal text-burgundy sm:text-6xl md:text-[4.4rem]">
-              Your design.
+              <SplitLine text="Your design." reduce={!!reduce} delay={0.2} />
             </span>
           </h1>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
             Boutique dresses, stitched to your measurements. Choose a look and order on WhatsApp — ready in 15 days.
           </p>
-          <Link to="/products" className="btn mt-5 inline-flex">
-            Shop the edit
-          </Link>
+          <Magnet className="mt-5 inline-flex">
+            <Link to="/products" className="btn">
+              Shop the edit
+            </Link>
+          </Magnet>
         </div>
 
         <div className="md:order-2">
@@ -115,5 +117,55 @@ export default function Hero() {
         </div>
       </div>
     </section>
+  )
+}
+
+function SplitLine({ text, reduce, delay = 0 }: { text: string; reduce: boolean; delay?: number }) {
+  if (reduce) return <>{text}</>
+  return (
+    <>
+      {text.split(' ').map((word, index) => (
+        <motion.span
+          key={word}
+          className="mr-[0.22em] inline-block"
+          initial={{ y: '0.45em', opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.55, delay: delay + index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </>
+  )
+}
+
+function Magnet({ className, children }: { className?: string; children: ReactNode }) {
+  const reduce = useReducedMotion()
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 })
+  const springY = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 })
+  const ref = useRef<HTMLDivElement>(null)
+
+  function move(event: PointerEvent) {
+    if (reduce || !ref.current) return
+    const box = ref.current.getBoundingClientRect()
+    x.set((event.clientX - (box.left + box.width / 2)) * 0.28)
+    y.set((event.clientY - (box.top + box.height / 2)) * 0.28)
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      style={reduce ? undefined : { x: springX, y: springY }}
+      onPointerMove={move}
+      onPointerLeave={() => {
+        x.set(0)
+        y.set(0)
+      }}
+    >
+      {children}
+    </motion.div>
   )
 }
