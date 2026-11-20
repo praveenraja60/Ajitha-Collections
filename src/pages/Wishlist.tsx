@@ -11,7 +11,7 @@ export default function WishlistPage() {
   const list = useMemo(() => ids.map((id) => getProduct(id)).filter((p): p is NonNullable<typeof p> => Boolean(p)), [ids])
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-6 pt-[4.25rem] sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 pb-6 pt-[7.25rem] sm:px-6 sm:pt-32">
       <Seo title="Wishlist | Ajitha Collection" />
       <p className="eyebrow">Saved</p>
       <h1 className="display-title">Wishlist</h1>

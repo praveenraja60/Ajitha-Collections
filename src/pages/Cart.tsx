@@ -10,7 +10,7 @@ export default function CartPage() {
   const { getProduct } = useDresses()
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-6 pt-[4.25rem] sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 pb-6 pt-[7.25rem] sm:px-6 sm:pt-32">
       <Seo title="Cart | Ajitha Collection" description="Review your bag and order on WhatsApp." />
       <p className="eyebrow">Bag</p>
       <h1 className="display-title">Cart</h1>

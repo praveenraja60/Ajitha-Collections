@@ -15,7 +15,7 @@ export default function CollectionsPage() {
   }, [q, products, searchProducts])
 
   return (
-    <div className="px-4 pb-6 pt-[4.25rem] sm:px-6">
+    <div className="px-4 pb-6 pt-[7.25rem] sm:px-6 sm:pt-32">
       <Seo
         title="Shop dresses | Ajitha Collection"
         description="Browse the Ajitha Collection dresses. Custom stitching on WhatsApp."

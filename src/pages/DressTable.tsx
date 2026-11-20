@@ -117,7 +117,7 @@ export default function DressTable() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pb-8 pt-[4.4rem] sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 pb-8 pt-[7.25rem] sm:px-6 sm:pt-32">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow">Studio</p>
